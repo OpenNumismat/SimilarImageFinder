@@ -6,7 +6,7 @@ from PySide6.QtWidgets import *
 from PySide6.QtCore import Signal as pyqtSignal
 
 try:
-    import OpenNumismat
+    from OpenNumismat import IMAGE_PATH
     from OpenNumismat.ImageViewer import ImageViewer
     from OpenNumismat.Settings import Settings
     from OpenNumismat.Tools import TemporaryDir
@@ -16,6 +16,13 @@ except ModuleNotFoundError:
     from ImageEditor import ImageEditorDialog
     from Tools import TemporaryDir
     from Tools.Gui import getSaveFileName
+
+    IMAGE_PATH = QStandardPaths.standardLocations(QStandardPaths.PicturesLocation)[0]
+
+    class Settings(dict):
+        def __init__(self):
+            super().__init__()
+            self['built_in_viewer'] = True
 
 
 class ImageLabel(QLabel):
@@ -77,7 +84,7 @@ class ImageLabel(QLabel):
             executor.openUrl(QUrl.fromLocalFile(fileName))
 
     def editImage(self):
-        viewer = ImageViewer(self)
+        viewer = ImageEditorDialog(self)
         viewer.imageSaved.connect(self.imageSaved)
         viewer.setImage(self.image)
         viewer.exec_()
@@ -164,7 +171,7 @@ class ImageLabel(QLabel):
                    self.tr("All files (*.*)"))
         # TODO: Set default name to coin title + field name
         fileName, _selectedFilter = getSaveFileName(
-            self, 'save_image', self.field, OpenNumismat.IMAGE_PATH, filters)
+            self, 'save_image', self.field, IMAGE_PATH, filters)
         if fileName:
             self.image.save(fileName)
 
@@ -179,7 +186,7 @@ class ImageLabel(QLabel):
 
 
 class ImageEdit(ImageLabel):
-#    latestDir = OpenNumismat.IMAGE_PATH
+    latestDir = IMAGE_PATH
     imageChanged = pyqtSignal(QLabel)
 
     def __init__(self, field=None, label=None, parent=None):

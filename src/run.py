@@ -1,13 +1,8 @@
 import sys
-from PySide6.QtCore import QCoreApplication, QLibraryInfo, QLocale, QSettings, QTranslator
-from PySide6.QtGui import QImage
-from PySide6.QtWidgets import QApplication, QDialog
-from FindDialog import FindDialog
+from PySide6.QtCore import QCoreApplication, QLibraryInfo, QLocale, QTranslator
+from PySide6.QtWidgets import QApplication
+from FindWindow import FindWindow
 from Tools import TemporaryDir
-
-
-class Model():
-    fields = [] 
 
 
 def main():
@@ -29,9 +24,7 @@ def main():
 #    if translator.load(locale, 'qtbase', '_', path):
 #        app.installTranslator(translator)
 
-    model = Model()
-
-    dlg = FindDialog(model)
+    dlg = FindWindow()
     dlg.exec()
 
     # Clear temporary files
