@@ -1,0 +1,4 @@
+imagehash
+opencv-python-headless
+pillow
+pyside6

@@ -1,0 +1,3 @@
+[submodule "src/ImageEditor"]
+	path = src/ImageEditor
+	url = https://github.com/OpenNumismat/ImageEditor
