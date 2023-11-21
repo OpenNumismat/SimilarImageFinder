@@ -1,5 +1,7 @@
 import io
+import time
 from PIL import Image
+from datetime import datetime
 from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
@@ -101,6 +103,8 @@ class FindWindow(FindDialog):
         settings.setValue('image_find/scan_subfolders', scan_subfolders)
 
     def start(self):
+        start_processing_time = time.process_time()
+
         self.saveSettings()
 
         folder = self.folderEdit.text()
@@ -137,6 +141,7 @@ class FindWindow(FindDialog):
 
         comparison_results = []
 
+        start_hashing_time = time.process_time()
         for fileName, filePath in self.model.scan():
             progressDlg.step()
             if progressDlg.wasCanceled():
@@ -152,6 +157,7 @@ class FindWindow(FindDialog):
                 filePath,
                 record_distance
             ))
+        done_hashing_time = time.process_time()
 
         progressDlg.reset()
 
@@ -180,6 +186,11 @@ class FindWindow(FindDialog):
             self.table.addItem(item)
 
         self.table.update()
+
+        done_processing_time = time.process_time()
+        print(f"Hashing time: {done_hashing_time - start_hashing_time:.2f}",
+              f"({(done_hashing_time - start_hashing_time)*100/row_count:.2f}ms per 100).",
+              f"Total time: {done_processing_time - start_processing_time:.2f}")
 
     def _getImageData(self, photo_id):
         with open(photo_id, "rb") as file:
