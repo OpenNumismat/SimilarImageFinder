@@ -174,8 +174,8 @@
 (double-click, right-click or
 drag-n-drop to add an image)</source>
         <translation>Няма налично изображение
-(двойно щракване, щракване с десния бутон на мишката или
-плъзгане и пускане, за да добавите изображение)</translation>
+(щракнете двукратно, щракнете с десния бутон или
+плъзнете и пуснете, за да добавите изображение)</translation>
     </message>
     <message>
         <source>Rename image</source>
