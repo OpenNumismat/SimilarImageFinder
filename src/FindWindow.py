@@ -1,5 +1,4 @@
 import io
-import os
 from PIL import Image
 from PySide6.QtCore import *
 from PySide6.QtGui import *
@@ -15,9 +14,7 @@ class Model():
 
     def __init__(self):
         self.folder = None
-
-    def setFolder(self, folder):
-        self.folder = folder
+        self.scan_subfolders = False
 
     def getPhotoCount(self):
         count = 0
@@ -28,16 +25,21 @@ class Model():
 
     def scan(self):
         if self.folder:
-            formats = ["*.jpg", "*.jpeg", "*.bmp", "*.png", "*.tif", "*.tiff", "*.gif"]
+            filters = ["*.jpg", "*.jpeg", "*.bmp", "*.png", "*.tif", "*.tiff", "*.gif"]
             supported_formats = QImageReader.supportedImageFormats()
             if b'webp' in supported_formats:
-                formats.append("*.webp")
+                filters.append("*.webp")
             if b'jp2' in supported_formats:
-                formats.append("*.jp2")
+                filters.append("*.jp2")
 
-            dir_ = QDir(self.folder)
-            for fileName in dir_.entryList(formats, QDir.AllEntries | QDir.NoDotAndDotDot, QDir.Name):
-                yield fileName, dir_.filePath(fileName)
+            if self.scan_subfolders:
+                flags = QDirIterator.Subdirectories
+            else:
+                flags = QDirIterator.NoIteratorFlags
+            it = QDirIterator(self.folder, filters, QDir.Files, flags)
+            while it.hasNext():
+                it.next()
+                yield it.fileName(), it.filePath()
 
 
 class FindWindow(FindDialog):
@@ -48,23 +50,32 @@ class FindWindow(FindDialog):
         super().__init__(model, parent)
 
         settings = QSettings()
-        folder = settings.value('image_find/folder')
 
+        folder = settings.value('image_find/folder')
         self.folderEdit = QLineEdit(folder, self)
         self.folderEdit.setMinimumWidth(120)
         icon = QApplication.style().standardIcon(QStyle.SP_DirOpenIcon)
         folderButton = QPushButton(icon, '', self)
         folderButton.clicked.connect(self.folderButtonClicked)
+        folderLabel = QLabel(self.tr("Find in folder"), self)
 
         hLayout = QHBoxLayout()
+        hLayout.addWidget(folderLabel)
         hLayout.addWidget(self.folderEdit)
         hLayout.addWidget(folderButton)
 
         self.layout().insertLayout(0, hLayout)
 
+        scan_subfolders = settings.value('image_find/scan_subfolders', False, type=bool)
+        self.scanSubfolders = QCheckBox(self.tr("Scan subfolders"), self)
+        if scan_subfolders:
+            self.scanSubfolders.setCheckState(Qt.Checked)
+
+        self.layout().insertWidget(1, self.scanSubfolders)
+
     def folderButtonClicked(self):
         folder = QFileDialog.getExistingDirectory(
-            self, self.tr("Source folder"), self.folderEdit.text())
+            self, self.tr("Find in folder"), self.folderEdit.text())
         if folder:
             self.folderEdit.setText(folder)
 
@@ -86,11 +97,16 @@ class FindWindow(FindDialog):
         folder = self.folderEdit.text()
         settings.setValue('image_find/folder', folder)
 
+        scan_subfolders = bool(self.scanSubfolders.checkState())
+        settings.setValue('image_find/scan_subfolders', scan_subfolders)
+
     def start(self):
         self.saveSettings()
 
         folder = self.folderEdit.text()
-        self.model.setFolder(folder)
+        self.model.folder = folder
+        scan_subfolders = bool(self.scanSubfolders.checkState())
+        self.model.scan_subfolders = scan_subfolders
 
         img = self.targetImgLabel.data()
         if isinstance(img, QImage):
