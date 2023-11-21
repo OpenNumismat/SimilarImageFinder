@@ -13,16 +13,16 @@ def main():
 
     TemporaryDir.init('SimilarImageFinder')
 
-#    locale = QLocale()
+    locale = QLocale()
 
-#    translator = QTranslator(app)
-#    if translator.load(locale, 'lang', '_', ':/i18n'):
-#        app.installTranslator(translator)
+    translator = QTranslator(app)
+    if translator.load(locale, 'lang', '_', ':/i18n'):
+        app.installTranslator(translator)
 
-#    path = QLibraryInfo.path(QLibraryInfo.TranslationsPath)
-#    translator = QTranslator(app)
-#    if translator.load(locale, 'qtbase', '_', path):
-#        app.installTranslator(translator)
+    path = QLibraryInfo.path(QLibraryInfo.TranslationsPath)
+    translator = QTranslator(app)
+    if translator.load(locale, 'qtbase', '_', path):
+        app.installTranslator(translator)
 
     dlg = FindWindow()
     dlg.exec()
@@ -32,5 +32,5 @@ def main():
 
 
 if __name__ == "__main__":
-#    import resources
+    import resources
     main()
