@@ -47,6 +47,8 @@ class FindDialog(QDialog):
         self.imgLabel = ImageLabel()
         self.imgLabel.setFrameStyle(QFrame.Panel | QFrame.Plain)
 
+        form_layout = QFormLayout()
+
         self.methodSelector = QComboBox()
         self.methodSelector.setSizePolicy(QSizePolicy.Fixed,
                                           QSizePolicy.Fixed)
@@ -61,6 +63,8 @@ class FindDialog(QDialog):
         if index:
             self.methodSelector.setCurrentIndex(index)
 
+        form_layout.addRow(self.tr("Hashing method"), self.methodSelector)
+
         self.similarityLabel = QLabel()
         self.similaritySlider = QSlider(Qt.Horizontal)
         self.similaritySlider.setRange(0, 100)
@@ -72,28 +76,28 @@ class FindDialog(QDialog):
         similarity = settings.value('image_find/similarity', 75, type=int)
         self.similaritySlider.setValue(similarity)
 
-        field_layout = QGridLayout()
-        field_box = QGroupBox(self.tr("Field"))
-        field_box.setLayout(field_layout)
-
-        form_layout = QFormLayout()
-        form_layout.addRow(self.tr("Hashing method"), self.methodSelector)
         form_layout.addRow(self.similarityLabel, self.similaritySlider)
-        form_layout.addRow(field_box)
 
-        field_pos = 0
-        fields_per_row = 2
         self.fieldsCheckBox = {}
-        for field in self.model.fields:
-            if field.type == Type.Image and field.enabled:
-                checkBox = QCheckBox(field.title)
-                checked = settings.value("image_find/%s" % field.name, True, type=bool)
-                checkBox.setChecked(checked)
+        if self.model.fields:
+            field_layout = QGridLayout()
+            field_box = QGroupBox(self.tr("Field"))
+            field_box.setLayout(field_layout)
 
-                self.fieldsCheckBox[field.name] = checkBox
-                field_layout.addWidget(checkBox, field_pos // fields_per_row,
-                                       field_pos % fields_per_row)
-                field_pos += 1
+            field_pos = 0
+            fields_per_row = 2
+            for field in self.model.fields:
+                if field.type == Type.Image and field.enabled:
+                    checkBox = QCheckBox(field.title)
+                    checked = settings.value("image_find/%s" % field.name, True, type=bool)
+                    checkBox.setChecked(checked)
+
+                    self.fieldsCheckBox[field.name] = checkBox
+                    field_layout.addWidget(checkBox, field_pos // fields_per_row,
+                                           field_pos % fields_per_row)
+                    field_pos += 1
+
+            form_layout.addRow(field_box)
 
         self.findButton = QPushButton(self.tr("Start"))
         self.findButton.setEnabled(False)
