@@ -6,8 +6,10 @@ from PySide6.QtCore import *
 from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
-from FindDialog import FindDialog, ComparisonResult, TableWidget
+from FindDialog import FindDialog, ComparisonResult, TableWidget, CardDelegate
 from Tools import Gui
+
+CardDelegate.LABEL_HEIGHT = 18 + 4
 
 
 class Model():
