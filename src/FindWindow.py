@@ -99,7 +99,7 @@ class FindWindow(FindDialog):
         folder = self.folderEdit.text()
         settings.setValue('image_find/folder', folder)
 
-        scan_subfolders = bool(self.scanSubfolders.checkState())
+        scan_subfolders = (self.scanSubfolders.checkState() == Qt.Checked)
         settings.setValue('image_find/scan_subfolders', scan_subfolders)
 
     def start(self):
@@ -109,7 +109,7 @@ class FindWindow(FindDialog):
 
         folder = self.folderEdit.text()
         self.model.folder = folder
-        scan_subfolders = bool(self.scanSubfolders.checkState())
+        scan_subfolders = (self.scanSubfolders.checkState() == Qt.Checked)
         self.model.scan_subfolders = scan_subfolders
 
         img = self.targetImgLabel.data()
