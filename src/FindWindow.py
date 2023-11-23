@@ -1,5 +1,7 @@
+import cv2
 import io
 import time
+import numpy as np
 from PIL import Image
 from datetime import datetime
 from PySide6.QtCore import *
@@ -125,8 +127,27 @@ class FindWindow(FindDialog):
 
         method = self.methodSelector.currentData()
 
-        pil_target_img = Image.open(io.BytesIO(target_data))
-        target_hash = self._imageHash(pil_target_img, method)
+
+        if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
+                      'mhhash', 'phash_cv', 'radialhash'):
+            interpolation = cv2.INTER_AREA
+            if method == 'ahash_cv':
+                size = (8, 8)
+            elif method == 'blockhash':
+                size = (256, 256)
+            elif method == 'phash_cv':
+                size = (32, 32)
+            else:
+                size = None
+
+            image = np.asarray(bytearray(target_data), dtype=np.uint8)
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            if size:
+                image = cv2.resize(image, size, interpolation=interpolation)
+            target_hash = self._imageHash(image, method)
+        else:
+            pil_target_img = Image.open(io.BytesIO(target_data))
+            target_hash = self._imageHash(pil_target_img, method)
 
         fields = []
         for field, check_box in self.fieldsCheckBox.items():
@@ -149,13 +170,40 @@ class FindWindow(FindDialog):
             if progressDlg.wasCanceled():
                 break
 
-            pil_img = Image.open(filePath)
-            hash_ = self._imageHash(pil_img, method)
-            record_distance = target_hash - hash_
+            if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
+                          'mhhash', 'phash_cv', 'radialhash'):
 
+                image = cv2.imdecode(np.fromfile(filePath, dtype=np.uint8), cv2.IMREAD_COLOR)
+                if size:
+                    image = cv2.resize(image, size, interpolation=interpolation)
+                hash_ = self._imageHash(image, method)
+                if method == 'ahash_cv':
+                    hsh = cv2.img_hash.AverageHash_create()
+                elif method == 'blockhash':
+                    hsh = cv2.img_hash.BlockMeanHash_create()
+                elif method == 'colorhash_cv':
+                    hsh = cv2.img_hash.ColorMomentHash_create()
+                elif method == 'mhhash':
+                    hsh = cv2.img_hash.MarrHildrethHash_create()
+                elif method == 'phash_cv':
+                    hsh = cv2.img_hash.PHash_create()
+                elif method == 'radialhash':
+                    hsh = cv2.img_hash.RadialVarianceHash_create()
+                record_distance = hsh.compare(target_hash, hash_)
+                if method == 'radialhash':
+                    record_distance = 1. - record_distance
+            else:
+                pil_img = Image.open(filePath)
+                hash_ = self._imageHash(pil_img, method)
+                record_distance = target_hash - hash_
+
+            if method in ('crop_resistant_hash', 'radialhash'):
+                record_distance_str = f"{record_distance:.2f}"
+            else:
+                record_distance_str = f"{int(record_distance)}"
             comparison_results.append(ComparisonResult(
                 0,
-                fileName,
+                f"{fileName} [{record_distance_str}]",
                 filePath,
                 record_distance
             ))
@@ -177,6 +225,16 @@ class FindWindow(FindDialog):
         max_val = 64
         if method == 'crop_resistant_hash':
             max_val = 5
+        elif method == 'blockhash':
+            max_val = 256
+        elif method == 'colorhash_cv':
+            max_val = 256
+        elif method == 'bhash':
+            max_val = 256
+        elif method == 'mhhash':
+            max_val = 576
+        elif method == 'radialhash':
+            max_val = 1
         max_distance = max_val * (100 - similarity) / 100
 
         for comp_res in comparison_results:

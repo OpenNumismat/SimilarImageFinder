@@ -1,3 +1,5 @@
+import blockhash.core
+import cv2
 import imagehash
 import io
 from dataclasses import dataclass
@@ -58,6 +60,13 @@ class FindDialog(QDialog):
         self.methodSelector.addItem("Wavelet", 'whash')
         self.methodSelector.addItem("Color", 'colorhash')
         self.methodSelector.addItem("Crop-resistant", 'crop_resistant_hash')
+        self.methodSelector.addItem("Average (OpenCV)", 'ahash_cv')
+        self.methodSelector.addItem("BlockMean", 'blockhash')
+        self.methodSelector.addItem("ColorMoment", 'colorhash_cv')
+        self.methodSelector.addItem("Marr-Hildreth", 'mhhash')
+        self.methodSelector.addItem("Perceptual (OpenCV)", 'phash_cv')
+        self.methodSelector.addItem("Radial Variance", 'radialhash')
+        self.methodSelector.addItem("Block", 'bhash')
         method = settings.value('image_find/method', 'phash')
         index = self.methodSelector.findData(method)
         if index:
@@ -70,7 +79,7 @@ class FindDialog(QDialog):
         self.similaritySlider.setRange(0, 100)
         self.similaritySlider.setTickInterval(10)
         self.similaritySlider.setTickPosition(QSlider.TicksAbove)
-        self.similaritySlider.setSizePolicy(QSizePolicy.Fixed,
+        self.similaritySlider.setSizePolicy(QSizePolicy.Preferred,
                                             QSizePolicy.Fixed)
         self.similaritySlider.valueChanged.connect(self.similarityChanged)
         similarity = settings.value('image_find/similarity', 75, type=int)
@@ -280,6 +289,27 @@ class FindDialog(QDialog):
             return imagehash.colorhash(image)
         elif method == 'crop_resistant_hash':
             return imagehash.crop_resistant_hash(image)
+        elif method == 'ahash_cv':
+            hsh = cv2.img_hash.AverageHash_create()
+            return hsh.compute(image)
+        elif method == 'blockhash':
+            hsh = cv2.img_hash.BlockMeanHash_create()
+            return hsh.compute(image)
+        elif method == 'colorhash_cv':
+            hsh = cv2.img_hash.ColorMomentHash_create()
+            return hsh.compute(image)
+        elif method == 'mhhash':
+            hsh = cv2.img_hash.MarrHildrethHash_create()
+            return hsh.compute(image)
+        elif method == 'phash_cv':
+            hsh = cv2.img_hash.PHash_create()
+            return hsh.compute(image)
+        elif method == 'radialhash':
+            hsh = cv2.img_hash.RadialVarianceHash_create()
+            return hsh.compute(image)
+        elif method == 'bhash':
+            hash_ = blockhash.core.blockhash_even(image)
+            return imagehash.hex_to_hash(hash_)
 
     def _updateTableSizes(self):
         defaultHeight = self.table.verticalHeader().defaultSectionSize()
