@@ -9,6 +9,7 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 
 from FindDialog import FindDialog, ComparisonResult, TableWidget, CardDelegate
+from ImageLabel import ImageEdit
 from Tools import Gui
 
 CardDelegate.LABEL_HEIGHT = 18 + 4
@@ -79,6 +80,17 @@ class FindWindow(FindDialog):
 
         self.layout().insertWidget(1, self.scanSubfolders)
 
+        sizes = settings.value('image_find/splitter')
+        if sizes:
+            for i, size in enumerate(sizes):
+                sizes[i] = int(size)
+
+            self.splitter.setSizes(sizes)
+
+        latest_img_folder = settings.value('image_find/src_folder')
+        if latest_img_folder:
+            ImageEdit.latestDir = latest_img_folder
+
     def folderButtonClicked(self):
         folder = QFileDialog.getExistingDirectory(
             self, self.tr("Find in folder"), self.folderEdit.text())
@@ -106,6 +118,14 @@ class FindWindow(FindDialog):
         scan_subfolders = (self.scanSubfolders.checkState() == Qt.Checked)
         settings.setValue('image_find/scan_subfolders', scan_subfolders)
 
+        settings.setValue('image_find/src_folder', ImageEdit.latestDir)
+
+    def done(self, r):
+        super().done(r)
+
+        settings = QSettings()
+        settings.setValue('image_find/splitter', self.splitter.sizes())
+
     def start(self):
         start_processing_time = time.process_time()
 
@@ -126,8 +146,6 @@ class FindWindow(FindDialog):
             target_data = img
 
         method = self.methodSelector.currentData()
-
-
         if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
                       'mhhash', 'phash_cv', 'radialhash'):
             interpolation = cv2.INTER_AREA
