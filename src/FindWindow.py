@@ -148,20 +148,8 @@ class FindWindow(FindDialog):
         method = self.methodSelector.currentData()
         if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
                       'mhhash', 'phash_cv', 'radialhash'):
-            interpolation = cv2.INTER_AREA
-            if method == 'ahash_cv':
-                size = (8, 8)
-            elif method == 'blockhash':
-                size = (256, 256)
-            elif method == 'phash_cv':
-                size = (32, 32)
-            else:
-                size = None
-
             image = np.asarray(bytearray(target_data), dtype=np.uint8)
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            if size:
-                image = cv2.resize(image, size, interpolation=interpolation)
             target_hash = self._imageHash(image, method)
         else:
             pil_target_img = Image.open(io.BytesIO(target_data))
@@ -190,10 +178,7 @@ class FindWindow(FindDialog):
 
             if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
                           'mhhash', 'phash_cv', 'radialhash'):
-
                 image = cv2.imdecode(np.fromfile(filePath, dtype=np.uint8), cv2.IMREAD_COLOR)
-                if size:
-                    image = cv2.resize(image, size, interpolation=interpolation)
                 hash_ = self._imageHash(image, method)
                 if method == 'ahash_cv':
                     hsh = cv2.img_hash.AverageHash_create()

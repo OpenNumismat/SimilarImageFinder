@@ -290,9 +290,13 @@ class FindDialog(QDialog):
         elif method == 'crop_resistant_hash':
             return imagehash.crop_resistant_hash(image)
         elif method == 'ahash_cv':
+            interpolation = cv2.INTER_AREA
+            image = cv2.resize(image, (8, 8), interpolation=interpolation)
             hsh = cv2.img_hash.AverageHash_create()
             return hsh.compute(image)
         elif method == 'blockhash':
+            interpolation = cv2.INTER_AREA
+            image = cv2.resize(image, (255, 255), interpolation=interpolation)
             hsh = cv2.img_hash.BlockMeanHash_create()
             return hsh.compute(image)
         elif method == 'colorhash_cv':
@@ -302,6 +306,8 @@ class FindDialog(QDialog):
             hsh = cv2.img_hash.MarrHildrethHash_create()
             return hsh.compute(image)
         elif method == 'phash_cv':
+            interpolation = cv2.INTER_AREA
+            image = cv2.resize(image, (32, 32), interpolation=interpolation)
             hsh = cv2.img_hash.PHash_create()
             return hsh.compute(image)
         elif method == 'radialhash':
