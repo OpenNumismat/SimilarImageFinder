@@ -109,11 +109,11 @@
     <name>FindWindow</name>
     <message>
         <source>Find in folder</source>
-        <translation type="unfinished"/>
+        <translation>Localizar na pasta</translation>
     </message>
     <message>
         <source>Scan subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Analisar sub-pastas</translation>
     </message>
     <message>
         <source>Processing...</source>
