@@ -109,11 +109,11 @@
     <name>FindWindow</name>
     <message>
         <source>Find in folder</source>
-        <translation type="unfinished"/>
+        <translation>Намиране в папка</translation>
     </message>
     <message>
         <source>Scan subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Сканиране на подпапки</translation>
     </message>
     <message>
         <source>Processing...</source>
@@ -174,8 +174,8 @@
 (double-click, right-click or
 drag-n-drop to add an image)</source>
         <translation>Няма налично изображение
-(двойно щракване, щракване с десния бутон на мишката или
-плъзгане и пускане, за да добавите изображение)</translation>
+(щракнете двукратно, щракнете с десния бутон или
+плъзнете и пуснете, за да добавите изображение)</translation>
     </message>
     <message>
         <source>Rename image</source>
