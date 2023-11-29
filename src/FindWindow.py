@@ -80,6 +80,14 @@ class FindWindow(FindDialog):
 
         self.layout().insertWidget(1, self.scanSubfolders)
 
+        show_preprocessed = settings.value('image_find/show_preprocessed', False, type=bool)
+        self.showPreprocessed = QCheckBox(self.tr("Show preprocessed images"), self)
+        self.showPreprocessed.stateChanged.connect(self.showPreprocessedChanged)
+        if show_preprocessed:
+            self.showPreprocessed.setCheckState(Qt.Checked)
+
+        self.layout().insertWidget(2, self.showPreprocessed)
+
         crop_square = settings.value('image_find/crop_square', False, type=bool)
         self.cropSquare = QCheckBox(self.tr("Crop to square"), self)
         if crop_square:
@@ -97,6 +105,10 @@ class FindWindow(FindDialog):
         latest_img_folder = settings.value('image_find/src_folder')
         if latest_img_folder:
             ImageEdit.latestDir = latest_img_folder
+
+    def showPreprocessedChanged(self, _):
+        if isinstance(self.table, QTableWidget):
+            self.table.viewport().update()
 
     def folderButtonClicked(self):
         folder = QFileDialog.getExistingDirectory(
@@ -121,6 +133,9 @@ class FindWindow(FindDialog):
 
         folder = self.folderEdit.text()
         settings.setValue('image_find/folder', folder)
+
+        show_preprocessed = (self.showPreprocessed.checkState() == Qt.Checked)
+        settings.setValue('image_find/show_preprocessed', show_preprocessed)
 
         scan_subfolders = (self.scanSubfolders.checkState() == Qt.Checked)
         settings.setValue('image_find/scan_subfolders', scan_subfolders)
@@ -272,6 +287,15 @@ class FindWindow(FindDialog):
     def _getImageData(self, photo_id):
         with open(photo_id, "rb") as file:
             data = file.read()
+
+        show_preprocessed = (self.showPreprocessed.checkState() == Qt.Checked)
+        if show_preprocessed:
+            image = np.asarray(bytearray(data), dtype=np.uint8)
+            image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+
+            image = self.preprocessing(image)
+
+            data = cv2.imencode('.png', image)[1].tobytes()
 
         return data
 

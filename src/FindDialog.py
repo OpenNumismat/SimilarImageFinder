@@ -133,7 +133,8 @@ class FindDialog(QDialog):
         widget = QWidget()
         widget.setLayout(img_layout)
         self.splitter.addWidget(widget)
-        self.splitter.addWidget(QWidget())
+        self.table = QWidget()
+        self.splitter.addWidget(self.table)
 
         layout = QVBoxLayout()
         layout.addWidget(self.splitter)
