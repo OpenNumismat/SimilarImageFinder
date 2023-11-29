@@ -49,7 +49,7 @@ class FindDialog(QDialog):
         self.imgLabel = ImageLabel()
         self.imgLabel.setFrameStyle(QFrame.Panel | QFrame.Plain)
 
-        form_layout = QFormLayout()
+        self.form_layout = QFormLayout()
 
         self.methodSelector = QComboBox()
         self.methodSelector.setSizePolicy(QSizePolicy.Fixed,
@@ -72,7 +72,7 @@ class FindDialog(QDialog):
         if index:
             self.methodSelector.setCurrentIndex(index)
 
-        form_layout.addRow(self.tr("Hashing method"), self.methodSelector)
+        self.form_layout.addRow(self.tr("Hashing method"), self.methodSelector)
 
         self.similarityLabel = QLabel()
         self.similaritySlider = QSlider(Qt.Horizontal)
@@ -85,7 +85,7 @@ class FindDialog(QDialog):
         similarity = settings.value('image_find/similarity', 75, type=int)
         self.similaritySlider.setValue(similarity)
 
-        form_layout.addRow(self.similarityLabel, self.similaritySlider)
+        self.form_layout.addRow(self.similarityLabel, self.similaritySlider)
 
         self.fieldsCheckBox = {}
         if self.model.fields:
@@ -106,7 +106,7 @@ class FindDialog(QDialog):
                                            field_pos % fields_per_row)
                     field_pos += 1
 
-            form_layout.addRow(field_box)
+            self.form_layout.addRow(field_box)
 
         self.findButton = QPushButton(self.tr("Start"))
         self.findButton.setEnabled(False)
@@ -115,7 +115,7 @@ class FindDialog(QDialog):
         self.findButton.clicked.connect(self.start)
 
         ctrl_layout = QVBoxLayout()
-        ctrl_layout.addLayout(form_layout)
+        ctrl_layout.addLayout(self.form_layout)
         ctrl_layout.addWidget(self.findButton)
 
         img_layout = QHBoxLayout()

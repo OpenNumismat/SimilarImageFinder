@@ -80,6 +80,13 @@ class FindWindow(FindDialog):
 
         self.layout().insertWidget(1, self.scanSubfolders)
 
+        crop_square = settings.value('image_find/crop_square', False, type=bool)
+        self.cropSquare = QCheckBox(self.tr("Crop to square"), self)
+        if crop_square:
+            self.cropSquare.setCheckState(Qt.Checked)
+
+        self.form_layout.addRow(self.cropSquare)
+
         sizes = settings.value('image_find/splitter')
         if sizes:
             for i, size in enumerate(sizes):
@@ -120,6 +127,9 @@ class FindWindow(FindDialog):
 
         settings.setValue('image_find/src_folder', ImageEdit.latestDir)
 
+        crop_square = (self.cropSquare.checkState() == Qt.Checked)
+        settings.setValue('image_find/crop_square', crop_square)
+
     def done(self, r):
         super().done(r)
 
@@ -150,10 +160,12 @@ class FindWindow(FindDialog):
                       'mhhash', 'phash_cv', 'radialhash'):
             image = np.asarray(bytearray(target_data), dtype=np.uint8)
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
+            image = self.preprocessing(image)
             target_hash = self._imageHash(image, method)
         else:
-            pil_target_img = Image.open(io.BytesIO(target_data))
-            target_hash = self._imageHash(pil_target_img, method)
+            image = Image.open(io.BytesIO(target_data))
+            image = self.preprocessing(image)
+            target_hash = self._imageHash(image, method)
 
         fields = []
         for field, check_box in self.fieldsCheckBox.items():
@@ -179,6 +191,7 @@ class FindWindow(FindDialog):
             if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
                           'mhhash', 'phash_cv', 'radialhash'):
                 image = cv2.imdecode(np.fromfile(filePath, dtype=np.uint8), cv2.IMREAD_COLOR)
+                image = self.preprocessing(image)
                 hash_ = self._imageHash(image, method)
                 if method == 'ahash_cv':
                     hsh = cv2.img_hash.AverageHash_create()
@@ -196,8 +209,9 @@ class FindWindow(FindDialog):
                 if method == 'radialhash':
                     record_distance = 1. - record_distance
             else:
-                pil_img = Image.open(filePath)
-                hash_ = self._imageHash(pil_img, method)
+                image = Image.open(filePath)
+                image = self.preprocessing(image)
+                hash_ = self._imageHash(image, method)
                 record_distance = target_hash - hash_
 
             if method in ('crop_resistant_hash', 'radialhash'):
@@ -260,3 +274,25 @@ class FindWindow(FindDialog):
             data = file.read()
 
         return data
+
+    def preprocessing(self, image):
+        crop_square = (self.cropSquare.checkState() == Qt.Checked)
+        if crop_square:
+            if isinstance(image, Image.Image):  # PIL
+                w, h = image.size
+                if w > h:
+                    offset = (w - h) // 2
+                    image = image.crop((offset, 0, w - offset, h))
+                else:
+                    offset = (h - w) // 2
+                    image = image.crop((0, offset, w, h - offset))
+            else:  # OpenCV
+                h, w = image.shape[:2]
+                if w > h:
+                    offset = (w - h) // 2
+                    image = image[0:h, offset:(w - offset)]
+                else:
+                    offset = (h - w) // 2
+                    image = image[offset:(h - offset), 0:w]
+
+        return image
