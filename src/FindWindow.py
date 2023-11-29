@@ -256,7 +256,7 @@ class FindWindow(FindDialog):
         similarity = self.similaritySlider.value()
         max_val = 64
         if method == 'crop_resistant_hash':
-            max_val = 5
+            max_val = len(target_hash.segment_hashes)
         elif method == 'blockhash':
             max_val = 256
         elif method == 'colorhash_cv':
