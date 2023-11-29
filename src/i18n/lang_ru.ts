@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Crop to square</source>
-        <translation type="unfinished"/>
+        <translation>Обрезать до квадрата</translation>
     </message>
 </context>
 <context>
