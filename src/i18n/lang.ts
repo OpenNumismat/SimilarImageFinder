@@ -125,6 +125,14 @@
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Crop to square</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GetSaveFileName</name>
