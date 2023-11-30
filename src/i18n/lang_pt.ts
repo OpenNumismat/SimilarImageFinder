@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Show preprocessed images</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar imagens pré-processadas</translation>
     </message>
     <message>
         <source>Crop to square</source>
