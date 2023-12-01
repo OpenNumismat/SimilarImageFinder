@@ -109,7 +109,7 @@
     <name>FindWindow</name>
     <message>
         <source>Find in folder</source>
-        <translation type="unfinished"/>
+        <translation>Suche im Ordner</translation>
     </message>
     <message>
         <source>Scan subfolders</source>
