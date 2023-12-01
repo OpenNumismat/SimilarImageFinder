@@ -98,7 +98,7 @@
     </message>
     <message>
         <source>Processing...</source>
-        <translation type="unfinished"/>
+        <translation>Verarbeitung…</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Processing...</source>
-        <translation type="unfinished"/>
+        <translation>Verarbeitung…</translation>
     </message>
     <message>
         <source>Cancel</source>
