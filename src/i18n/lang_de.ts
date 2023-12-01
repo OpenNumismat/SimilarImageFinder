@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>Scan subfolders</source>
-        <translation type="unfinished"/>
+        <translation>Durchsuche Unterordner</translation>
     </message>
     <message>
         <source>Processing...</source>
