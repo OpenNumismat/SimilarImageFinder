@@ -172,7 +172,7 @@ class FindWindow(FindDialog):
 
         method = self.methodSelector.currentData()
         if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
-                      'mhhash', 'phash_cv', 'radialhash'):
+                      'mhhash', 'phash_cv', 'radialhash', 'pdqhash'):
             image = np.asarray(bytearray(target_data), dtype=np.uint8)
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
             image = self.preprocessing(image)
@@ -204,7 +204,7 @@ class FindWindow(FindDialog):
                 break
 
             if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
-                          'mhhash', 'phash_cv', 'radialhash'):
+                          'mhhash', 'phash_cv', 'radialhash', 'pdqhash'):
                 image = cv2.imdecode(np.fromfile(filePath, dtype=np.uint8), cv2.IMREAD_COLOR)
                 image = self.preprocessing(image)
                 hash_ = self._imageHash(image, method)
@@ -220,7 +220,12 @@ class FindWindow(FindDialog):
                     hsh = cv2.img_hash.PHash_create()
                 elif method == 'radialhash':
                     hsh = cv2.img_hash.RadialVarianceHash_create()
-                record_distance = hsh.compare(target_hash, hash_)
+
+                if method == 'pdqhash':
+                    record_distance = target_hash - hash_
+                else:
+                    record_distance = hsh.compare(target_hash, hash_)
+
                 if method == 'radialhash':
                     record_distance = 1. - record_distance
             else:
@@ -262,6 +267,8 @@ class FindWindow(FindDialog):
         elif method == 'colorhash_cv':
             max_val = 256
         elif method == 'bhash':
+            max_val = 256
+        elif method == 'pdqhash':
             max_val = 256
         elif method == 'mhhash':
             max_val = 576

@@ -4,6 +4,11 @@ import imagehash
 import io
 from dataclasses import dataclass
 from PIL import Image
+try:
+    import pdqhash
+    PDQHASH_AVAILABLE = True
+except ModuleNotFoundError:
+    PDQHASH_AVAILABLE = False
 
 from PySide6.QtCore import Qt, QBuffer, QMargins, QRect, QRectF, QSettings
 from PySide6.QtGui import QImage, QPixmap, QIcon, QTextOption, QPalette
@@ -67,6 +72,8 @@ class FindDialog(QDialog):
         self.methodSelector.addItem("Perceptual (OpenCV)", 'phash_cv')
         self.methodSelector.addItem("Radial Variance", 'radialhash')
         self.methodSelector.addItem("Block", 'bhash')
+        if PDQHASH_AVAILABLE:
+            self.methodSelector.addItem("PDQ (Facebook)", 'pdqhash')
         method = settings.value('image_find/method', 'phash')
         index = self.methodSelector.findData(method)
         if index:
@@ -317,6 +324,9 @@ class FindDialog(QDialog):
         elif method == 'bhash':
             hash_ = blockhash.core.blockhash_even(image)
             return imagehash.hex_to_hash(hash_)
+        elif method == 'pdqhash':
+            hash_, _ = pdqhash.compute(image)
+            return imagehash.ImageHash(hash_)
 
     def _updateTableSizes(self):
         defaultHeight = self.table.verticalHeader().defaultSectionSize()

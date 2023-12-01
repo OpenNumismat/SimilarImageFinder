@@ -17,8 +17,9 @@ The following hash types are currently supported:
 * Radial variance hashing
 * Block mean hashing
 * Color moment hashing
+* PDQ hashing
 
-For hash calcualtion uses labraries [ImageHash](https://github.com/JohannesBuchner/imagehash), [OpenCV](https://github.com/opencv/opencv-python) and [blockhash-python](https://github.com/commonsmachinery/blockhash-python).
+For hash calcualtion uses labraries [ImageHash](https://github.com/JohannesBuchner/imagehash), [OpenCV](https://github.com/opencv/opencv-python), [pdqhash](https://github.com/faustomorales/pdqhash-python) and [blockhash](https://github.com/commonsmachinery/blockhash-python).
 
 SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) project, so it aims to finding coins images.
 
