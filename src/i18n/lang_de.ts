@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>No image fields selected</source>
-        <translation type="unfinished"/>
+        <translation>keine Bild-Felder ausgewählt</translation>
     </message>
     <message>
         <source>Processing...</source>
