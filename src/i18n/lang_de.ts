@@ -181,7 +181,9 @@
         <source>No image available
 (double-click, right-click or
 drag-n-drop to add an image)</source>
-        <translation type="unfinished"/>
+        <translation>Kein Bild verfügbar
+(Doppelklick, Rechtsklick oder
+„drag-n-drop“, um Bild hinzuzufügen )</translation>
     </message>
     <message>
         <source>Rename image</source>
