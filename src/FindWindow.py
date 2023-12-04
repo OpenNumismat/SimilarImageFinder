@@ -11,6 +11,7 @@ from PySide6.QtWidgets import *
 from FindDialog import FindDialog, ComparisonResult, TableWidget, CardDelegate
 from ImageLabel import ImageEdit
 from Tools import Gui
+from cv2_tools import *
 
 CardDelegate.LABEL_HEIGHT = 18 + 4
 
@@ -95,6 +96,21 @@ class FindWindow(FindDialog):
 
         self.form_layout.addRow(self.cropSquare)
 
+        self.preprocessSelector = QComboBox()
+        self.preprocessSelector.setSizePolicy(QSizePolicy.Fixed,
+                                          QSizePolicy.Fixed)
+        self.preprocessSelector.addItem("None", 'none')
+        self.preprocessSelector.addItem("Sketch", 'sketch')
+        self.preprocessSelector.addItem("Contours", 'contours')
+        self.preprocessSelector.addItem("Canny", 'canny')
+        self.preprocessSelector.addItem("Segments", 'segments')
+        preprocess = settings.value('image_find/preprocess', 'none')
+        index = self.preprocessSelector.findData(preprocess)
+        if index:
+            self.preprocessSelector.setCurrentIndex(index)
+
+        self.form_layout.addRow(self.tr("Preprocessing"), self.preprocessSelector)
+
         sizes = settings.value('image_find/splitter')
         if sizes:
             for i, size in enumerate(sizes):
@@ -144,6 +160,9 @@ class FindWindow(FindDialog):
 
         crop_square = (self.cropSquare.checkState() == Qt.Checked)
         settings.setValue('image_find/crop_square', crop_square)
+
+        preprocess = self.preprocessSelector.currentData()
+        settings.setValue('image_find/preprocess', preprocess)
 
     def done(self, r):
         super().done(r)
@@ -307,9 +326,14 @@ class FindWindow(FindDialog):
         return data
 
     def preprocessing(self, image):
+        if isinstance(image, Image.Image):  # PIL
+            is_pil_image = True
+        else:
+            is_pil_image = False
+
         crop_square = (self.cropSquare.checkState() == Qt.Checked)
         if crop_square:
-            if isinstance(image, Image.Image):  # PIL
+            if is_pil_image:  # PIL
                 w, h = image.size
                 if w > h:
                     offset = (w - h) // 2
@@ -325,5 +349,31 @@ class FindWindow(FindDialog):
                 else:
                     offset = (h - w) // 2
                     image = image[offset:(h - offset), 0:w]
+
+        preprocess = self.preprocessSelector.currentData()
+        if preprocess == 'sketch':
+            if is_pil_image:
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            image = img2sketch(image)
+            if is_pil_image:
+                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        elif preprocess == 'contours':
+            if is_pil_image:
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            image = img2countours(image)
+            if is_pil_image:
+                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        elif preprocess == 'canny':
+            if is_pil_image:
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            image = img2countoursCanny(image)
+            if is_pil_image:
+                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+        elif preprocess == 'segments':
+            if is_pil_image:
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            image = img2segments(image)
+            if is_pil_image:
+                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
         return image
