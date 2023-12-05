@@ -4,14 +4,9 @@ import numpy as np
 
 def img2sketch(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    inverted_gray_image = 255 - gray_image
-    blurred_img = cv2.GaussianBlur(inverted_gray_image, (21, 21), 0)
-    inverted_blurred_img = 255 - blurred_img
-    pencil_sketch_IMG = cv2.divide(gray_image, inverted_blurred_img, scale=256.0)
-#        pencil_sketch_IMG = cv2.equalizeHist(pencil_sketch_IMG)
-#        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
-#        pencil_sketch_IMG = clahe.apply(pencil_sketch_IMG)
-#        (thresh, pencil_sketch_IMG) = cv2.threshold(pencil_sketch_IMG, 127, 255, cv2.THRESH_BINARY)
+    blurred_img = cv2.GaussianBlur(gray_image, (21, 21), 0)
+    pencil_sketch_IMG = cv2.divide(gray_image, blurred_img, scale=256)
+
     return pencil_sketch_IMG
 
 
