@@ -1,19 +1,18 @@
 import cv2
 import numpy as np
-import imutils
 
 
 def img2sketch(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blurred_img = cv2.GaussianBlur(gray_image, (21, 21), 0)
-    pencil_sketch_IMG = cv2.divide(gray_image, blurred_img, scale=256)
+    sketch_image = cv2.divide(gray_image, blurred_img, scale=256)
 
-    return pencil_sketch_IMG
+    return sketch_image
 
 
 def img2pencilSketch(image):
-    mask, _ = cv2.pencilSketch(image, sigma_s=60, sigma_r=0.3, shade_factor=0.1)
-    return mask
+    bw_sketch, _ = cv2.pencilSketch(image, sigma_s=60, sigma_r=0.3, shade_factor=0.1)
+    return bw_sketch
 
 
 def img2countours(image):
@@ -42,9 +41,9 @@ def img2canny(image):
     # https://github.com/PyImageSearch/imutils/tree/master#automatic-canny-edge-detection
     sigma = 0.33
 
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # compute the median of the single channel pixel intensities
-    v = np.median(gray)
+    v = np.median(gray_image)
 
     # apply automatic Canny edge detection using the computed median
     lower = int(max(0, (1.0 - sigma) * v))
@@ -67,34 +66,36 @@ def img2segments(image):
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
 
-    pencil_sketch_IMG = lsd.drawSegments(img, lines)
+    segmented_image = lsd.drawSegments(img, lines)
 
-    return pencil_sketch_IMG
+    return segmented_image
 
 
 def img2fastFeatures(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
     fast = cv2.FastFeatureDetector_create(1400)
     # fast.setNonmaxSuppression(0)
-    kp1 = fast.detect(image, None)
+    kp1 = fast.detect(gray_image, None)
 
-    height, width = image.shape
+    height, width = gray_image.shape
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
-    img2 = cv2.drawKeypoints(img, kp1, img, color=(255, 0, 0))
+
+    img2 = cv2.drawKeypoints(img, kp1, None, color=(255, 0, 0))
 
     return img2
 
 
 def img2goodFeatures(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # GFTTDetector
-    corners = cv2.goodFeaturesToTrack(image, 200, 0.01, 10)
-    # corners = cv2.goodFeaturesToTrack(image, maxCorners=50, qualityLevel=0.02, minDistance=20)
+    corners = cv2.goodFeaturesToTrack(gray_image, 200, 0.01, 10)
+    # corners = cv2.goodFeaturesToTrack(gray_image, maxCorners=50, qualityLevel=0.02, minDistance=20)
     corners = np.int0(corners)
 
-    height, width = image.shape
+    height, width = gray_image.shape
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
 
@@ -114,7 +115,7 @@ def img2cornerHarris(image):
     # Applying the function
     dst = cv2.cornerHarris(gray_image, blockSize=2, ksize=3, k=0.04)
 
-    height, width, _ = image.shape
+    height, width = gray_image.shape
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
 
@@ -133,12 +134,12 @@ def img2orientedBRIEF(image):
     orb = cv2.ORB_create(nfeatures=2000)
     kp = orb.detect(gray_image)
 
-    height, width, _ = image.shape
+    height, width = gray_image.shape
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
 
     # Drawing the keypoints
-    kp_image = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0), flags=0)
+    kp_image = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0))
 
     return kp_image
 
@@ -150,7 +151,7 @@ def img2sift(image):
     orb = cv2.SIFT_create(nfeatures=2000)
     kp = orb.detect(gray_image)
 
-    height, width, _ = image.shape
+    height, width = gray_image.shape
     img = np.zeros([height, width, 1], dtype=np.uint8)
     img.fill(255)
 
@@ -159,6 +160,6 @@ def img2sift(image):
 #        cv2.circle(img, (int(x), int(y)), 2, (0, 0, 0))
 
     # Drawing the keypoints
-    kp_image = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0), flags=0)
+    kp_image = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0))
 
     return kp_image
