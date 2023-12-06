@@ -101,9 +101,15 @@ class FindWindow(FindDialog):
                                           QSizePolicy.Fixed)
         self.preprocessSelector.addItem("None", 'none')
         self.preprocessSelector.addItem("Sketch", 'sketch')
+        self.preprocessSelector.addItem("PencilSketch", 'pencil_sketch')
         self.preprocessSelector.addItem("Contours", 'contours')
         self.preprocessSelector.addItem("Canny", 'canny')
         self.preprocessSelector.addItem("Segments", 'segments')
+        self.preprocessSelector.addItem("FastFeature", 'fast')
+        self.preprocessSelector.addItem("GoodFeatures", 'good')
+        self.preprocessSelector.addItem("Corner Harris", 'corner')
+        self.preprocessSelector.addItem("Oriented BRIEF", 'orb')
+        self.preprocessSelector.addItem("SIFT", 'sift')
         preprocess = settings.value('image_find/preprocess', 'none')
         index = self.preprocessSelector.findData(preprocess)
         if index:
@@ -351,28 +357,31 @@ class FindWindow(FindDialog):
                     image = image[offset:(h - offset), 0:w]
 
         preprocess = self.preprocessSelector.currentData()
-        if preprocess == 'sketch':
+        if preprocess != 'none':
             if is_pil_image:
                 image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-            image = img2sketch(image)
-            if is_pil_image:
-                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        elif preprocess == 'contours':
-            if is_pil_image:
-                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-            image = img2countours(image)
-            if is_pil_image:
-                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        elif preprocess == 'canny':
-            if is_pil_image:
-                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-            image = img2countoursCanny(image)
-            if is_pil_image:
-                image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-        elif preprocess == 'segments':
-            if is_pil_image:
-                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-            image = img2segments(image)
+
+            if preprocess == 'sketch':
+                image = img2sketch(image)
+            if preprocess == 'pencil_sketch':
+                image = img2pencilSketch(image)
+            elif preprocess == 'contours':
+                image = img2countours(image)
+            elif preprocess == 'canny':
+                image = img2canny(image)
+            elif preprocess == 'segments':
+                image = img2segments(image)
+            elif preprocess == 'fast':
+                image = img2fastFeatures(image)
+            elif preprocess == 'good':
+                image = img2goodFeatures(image)
+            elif preprocess == 'corner':
+                image = img2cornerHarris(image)
+            elif preprocess == 'orb':
+                image = img2orientedBRIEF(image)
+            elif preprocess == 'sift':
+                image = img2sift(image)
+
             if is_pil_image:
                 image = Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
