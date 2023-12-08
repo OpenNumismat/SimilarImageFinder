@@ -123,6 +123,14 @@
         <source>Cancel</source>
         <translation>Отказ</translation>
     </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation>Покажи предварително обработените изображения</translation>
+    </message>
+    <message>
+        <source>Crop to square</source>
+        <translation>Изрежи до квадрат</translation>
+    </message>
 </context>
 <context>
     <name>GetSaveFileName</name>
