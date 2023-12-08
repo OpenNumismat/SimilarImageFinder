@@ -1,13 +1,13 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="bg">
+<?xml version="1.0" ?><!DOCTYPE TS><TS version="2.1" language="de">
 <context>
     <name>CropDialog</name>
     <message>
         <source>Crop</source>
-        <translation>Изрязване</translation>
+        <translation>Zuschneiden</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation>Автоматично</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <source>X</source>
@@ -19,11 +19,11 @@
     </message>
     <message>
         <source>Width</source>
-        <translation>Ширина</translation>
+        <translation>Breite</translation>
     </message>
     <message>
         <source>Height</source>
-        <translation>Височина</translation>
+        <translation>Höhe</translation>
     </message>
     <message>
         <source>X1</source>
@@ -59,306 +59,306 @@
     </message>
     <message>
         <source>Rect</source>
-        <translation>Правоъгълник</translation>
+        <translation>Rechteck</translation>
     </message>
     <message>
         <source>Circle</source>
-        <translation>Кръг</translation>
+        <translation>Kreis</translation>
     </message>
     <message>
         <source>Quad</source>
-        <translation>Четириъгълник</translation>
+        <translation>Quadrat</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation>Намиране</translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Field</source>
-        <translation>Поле</translation>
+        <translation>Feld</translation>
     </message>
     <message>
         <source>Hashing method</source>
-        <translation>Метод на хеширане</translation>
+        <translation>Hashing-Methode</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Начало</translation>
+        <translation>Start</translation>
     </message>
     <message>
         <source>Similarity</source>
-        <translation>Сходство</translation>
+        <translation>Ähnlichkeit</translation>
     </message>
     <message>
         <source>No image fields selected</source>
-        <translation>Не са избрани полета за изображения</translation>
+        <translation>keine Bild-Felder ausgewählt</translation>
     </message>
     <message>
         <source>Processing...</source>
-        <translation>Обработва се...</translation>
+        <translation>Verarbeitung…</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отказ</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>FindWindow</name>
     <message>
         <source>Find in folder</source>
-        <translation>Намиране в папка</translation>
+        <translation>Suche im Ordner</translation>
     </message>
     <message>
         <source>Scan subfolders</source>
-        <translation>Сканиране на подпапки</translation>
+        <translation>Durchsuche Unterordner</translation>
     </message>
     <message>
         <source>Processing...</source>
-        <translation>Обработва се...</translation>
+        <translation>Verarbeitung…</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation>Отказ</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Show preprocessed images</source>
-        <translation>Покажи предварително обработените изображения</translation>
+        <translation>Zeige vorverarbeitete Bilder</translation>
     </message>
     <message>
         <source>Crop to square</source>
-        <translation>Изрежи до квадрат</translation>
+        <translation>Beschneiden auf Quadrat</translation>
     </message>
 </context>
 <context>
     <name>GetSaveFileName</name>
     <message>
         <source>Save as</source>
-        <translation>Запиши като</translation>
+        <translation>Speichern als</translation>
     </message>
 </context>
 <context>
     <name>ImageEdit</name>
     <message>
         <source>Exchange with</source>
-        <translation>Размяна с</translation>
+        <translation>Austausch mit</translation>
     </message>
     <message>
         <source>Load...</source>
-        <translation>Зареждане...</translation>
+        <translation>Laden...</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Отваряне</translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Постави</translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Изтриване</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Save as...</source>
-        <translation>Запиши като...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <source>Rename...</source>
-        <translation>Преименуване...</translation>
+        <translation>Umbenennen...</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation>Отваряне на файл</translation>
+        <translation>Datei öffnen</translation>
     </message>
     <message>
         <source>No image available
 (double-click, right-click or
 drag-n-drop to add an image)</source>
-        <translation>Няма налично изображение
-(щракнете двукратно, щракнете с десния бутон или
-плъзнете и пуснете, за да добавите изображение)</translation>
+        <translation>Kein Bild verfügbar
+(Doppelklick, Rechtsklick oder
+„drag-n-drop“, um Bild hinzuzufügen )</translation>
     </message>
     <message>
         <source>Rename image</source>
-        <translation>Преименувай изображението</translation>
+        <translation>Bild umbenennen</translation>
     </message>
     <message>
         <source>Enter new image name</source>
-        <translation>Въведете ново име на изображението</translation>
+        <translation>Neuen Bildnamen eingeben</translation>
     </message>
 </context>
 <context>
     <name>ImageEditorDialog</name>
     <message>
         <source>Browse in viewer</source>
-        <translation>Преглеждайте в браузъра</translation>
+        <translation>Anzeige im Viewer</translation>
     </message>
     <message>
         <source>&amp;Save As...</source>
-        <translation>Запиши &amp;като...</translation>
+        <translation>&amp;Speichern unter...</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>И&amp;зход</translation>
+        <translation>&amp;Beenden</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation>Цял екран</translation>
+        <translation>Vollbild</translation>
     </message>
     <message>
         <source>Zoom &amp;In (25%)</source>
-        <translation>&amp;Увеличаване (25%)</translation>
+        <translation>&amp;Vergrößern (25%)</translation>
     </message>
     <message>
         <source>Zoom &amp;Out (25%)</source>
-        <translation>Н&amp;амаляване (25%)</translation>
+        <translation>&amp;Verkleinern (25%)</translation>
     </message>
     <message>
         <source>&amp;Normal Size</source>
-        <translation>&amp;Нормален размер</translation>
+        <translation>&amp;Normalgröße</translation>
     </message>
     <message>
         <source>&amp;Fit to Window</source>
-        <translation>&amp;Побери в прозореца</translation>
+        <translation>An Fentster anpassen</translation>
     </message>
     <message>
         <source>Show Tool Bar</source>
-        <translation>Показване на лентата с инструменти</translation>
+        <translation>Zeige Werkzeugleiste</translation>
     </message>
     <message>
         <source>Show Status Bar</source>
-        <translation>Показване на лентата на състоянието</translation>
+        <translation>Zeige Statusleiste</translation>
     </message>
     <message>
         <source>Rotate to Left</source>
-        <translation>Завърти наляво</translation>
+        <translation>Linksdrehung</translation>
     </message>
     <message>
         <source>Rotate to Right</source>
-        <translation>Завърти надясно</translation>
+        <translation>Rechtsdrehung</translation>
     </message>
     <message>
         <source>Rotate...</source>
-        <translation>Завъртване...</translation>
+        <translation>Drehen...</translation>
     </message>
     <message>
         <source>Crop...</source>
-        <translation>Изрязване...</translation>
+        <translation>Schnitt</translation>
     </message>
     <message>
         <source>Autocrop</source>
-        <translation>Автоматично изрязване</translation>
+        <translation>Autocrop-Schnitt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Записване</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Постави</translation>
+        <translation>Einfügen</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Отмени</translation>
+        <translation>rückgängig machen</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Върни</translation>
+        <translation>Wiederholung</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Файл</translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Редактиране</translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <source>&amp;View</source>
-        <translation>&amp;Изглед</translation>
+        <translation>&amp;Ansehen</translation>
     </message>
     <message>
         <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Изображения (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
+        <translation>Bilder (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
-        <translation>Всички файлове (*.*)</translation>
+        <translation>Alle Dateien (*.*)</translation>
     </message>
     <message>
         <source>Image was changed. Save changes?</source>
-        <translation>Изображението е променено. Да се запазят ли промените?</translation>
+        <translation>Das Bild wurde geändert. Änderungen speichern?</translation>
     </message>
 </context>
 <context>
     <name>ImageEditorWindow</name>
     <message>
         <source>&amp;Open...</source>
-        <translation>&amp;Отваряне...</translation>
+        <translation>Ö&amp;ffnen...</translation>
     </message>
 </context>
 <context>
     <name>ImageLabel</name>
     <message>
         <source>Open</source>
-        <translation>Отваряне</translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Редактиране...</translation>
+        <translation>Bearbeiten...</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Save as...</source>
-        <translation>Запиши като...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Изображения (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
+        <translation>Bilder (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
-        <translation>Всички файлове (*.*)</translation>
+        <translation>Alle Dateien (*.*)</translation>
     </message>
 </context>
 <context>
     <name>InfoMessageBox</name>
     <message>
         <source>Don&apos;t show this again</source>
-        <translation>Не показвай това съобщение отново</translation>
+        <translation>Nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>
     <name>RotateDialog</name>
     <message>
         <source>Rotate</source>
-        <translation>Завъртване</translation>
+        <translation>Drehen</translation>
     </message>
     <message>
         <source>Angle</source>
-        <translation>Ъгъл</translation>
+        <translation>Perspektive</translation>
     </message>
     <message>
         <source>Auto crop</source>
-        <translation>Автоматично изрязване</translation>
+        <translation>Auto-Crop-Schnitt</translation>
     </message>
     <message>
         <source>Show grid</source>
-        <translation>Показване на мрежа</translation>
+        <translation>Raster anzeigen</translation>
     </message>
 </context>
 </TS>
