@@ -121,6 +121,24 @@ def filtering(image, filters):
             image = resizing(image, 512)
         if filter_ == 'res256':
             image = resizing(image, 256)
+        if filter_ == 'sketch':
+            image = img2sketch(image)
+        if filter_ == 'pencil':
+            image = img2pencilSketch(image)
+        if filter_ == 'canny':
+            image = img2canny(image)
+        if filter_ == 'segments':
+            image = img2segments(image)
+        if filter_ == 'fast':
+            image = img2fastFeatures(image)
+        if filter_ == 'good':
+            image = img2goodFeatures(image)
+        if filter_ == 'corner':
+            image = img2cornerHarris(image)
+        if filter_ == 'orb':
+            image = img2orientedBRIEF(image)
+        if filter_ == 'sift':
+            image = img2sift(image)
 
     return image
 
@@ -227,14 +245,20 @@ def print_header():
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawTextHelpFormatter,
+        prog='SimilarImageFinder CLI',
+        epilog='Usage examples:\n'
+        ' cli.py --similar_files "01.jpg" "02.jpg" --folder C:/SimilarImageFinder/ --hash phash --preprocess corner sq-rev-sketch\n'
+        ' cli.py --similar_files "01.jpg" "02.jpg" --file C:/similar_image.jpg --folder C:/SimilarImageFinder/ --hash phash'
+    )
     parser.add_argument(
         "--file",
         help="File for search"
     )
     parser.add_argument(
         "--similar_files", required=True, nargs='+',
-        help="Group of similar files"
+        help="Group of similar image files in FOLDER"
     )
     parser.add_argument(
         "--folder", required=True,
@@ -251,8 +275,7 @@ def main():
     )
     parser.add_argument(
         "--filter", nargs='+',
-        choices=('none', 'sq', 'sq-res', 'sq-res512', 'sq-res256'),
-        help="List of preprocessing filters"
+        help="List of preprocessing filters. Can be any combination of none,sq,res,res512,res256,sketch,pencil,canny,segments,fast,good,corner,orb,sift joined with '-'"
     )
 
     args = parser.parse_args()
