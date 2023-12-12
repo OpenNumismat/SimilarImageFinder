@@ -325,6 +325,8 @@ class FindDialog(QDialog):
             hash_ = blockhash.core.blockhash_even(image)
             return imagehash.hex_to_hash(hash_)
         elif method == 'pdqhash':
+            if len(image.shape) == 2:
+                image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
             hash_, _ = pdqhash.compute(image)
             return imagehash.ImageHash(hash_)
 
