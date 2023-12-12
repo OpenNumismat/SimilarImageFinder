@@ -100,6 +100,9 @@ class FindWindow(FindDialog):
         self.filterSelector.setSizePolicy(QSizePolicy.Fixed,
                                           QSizePolicy.Fixed)
         self.filterSelector.addItem("None", 'none')
+        self.filterSelector.addItem("CLAHE", 'clahe')
+        self.filterSelector.addItem("Threshold", 'threshold')
+        self.filterSelector.addItem("Filter2D", 'filter2D')
         self.filterSelector.addItem("Sketch", 'sketch')
         self.filterSelector.addItem("PencilSketch", 'pencil_sketch')
         self.filterSelector.addItem("Contours", 'contours')
@@ -361,9 +364,15 @@ class FindWindow(FindDialog):
             if is_pil_image:
                 image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-            if filter_ == 'sketch':
+            if filter_ == 'clahe':
+                image = img2clahe(image)
+            elif filter_ == 'threshold':
+                image = img2threshold(image)
+            elif filter_ == 'filter2D':
+                image = img2filter2D(image)
+            elif filter_ == 'sketch':
                 image = img2sketch(image)
-            if filter_ == 'pencil_sketch':
+            elif filter_ == 'pencil_sketch':
                 image = img2pencilSketch(image)
             elif filter_ == 'contours':
                 image = img2countours(image)
