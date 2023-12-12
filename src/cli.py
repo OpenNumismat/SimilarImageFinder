@@ -162,22 +162,11 @@ def find_file(file_path, similar_files, folder, hash_method, act):
 
     done_time = time.process_time()
 
-    row_count = len(comparison_results)
-
     result_count = 15
     last_distance = comparison_results[result_count - 1]['distance']
     for result_count in range(result_count, len(comparison_results)):
         if last_distance < comparison_results[result_count]['distance']:
             break
-
-    hits_str = ""
-    hits = 0
-    for comparison_result in comparison_results[:result_count]:
-        if comparison_result['file'] in similar_files:
-            hits += 1
-            hits_str += "*"
-        else:
-            hits_str += "-"
 
     result_str = ""
     results = []
@@ -188,7 +177,6 @@ def find_file(file_path, similar_files, folder, hash_method, act):
         if distance != last_distance:
             if result_str:
                 results.append(result_str)
-                # print(last_distance, result_str)
                 result_str = ""
             last_distance = distance
 
@@ -197,20 +185,25 @@ def find_file(file_path, similar_files, folder, hash_method, act):
         else:
             result_str += "-"
     results.append(result_str)
-    # print(last_distance, result_str)
 
     similarity_points = 0
     point = 1
     for result_str in results:
         if '-' in result_str:
-            fail_point = 0.1
+            fail_point = 0.17
             fail_point *= result_str.count('-') / len(result_str)
             point -= fail_point
+            if point < 0:
+                break
         similarity_points += point * result_str.count('*')
 
-    print(f"{file_name}, {hash_method}, {act}, {hits}, {similarity_points:.2f}, {done_time - start_time:.2f}, {(done_time - start_time)*100/row_count:.2f}, {hits_str}")
+    hits_str = ''.join(results)
+    hits_str_2 = '/'.join(results)
+    hits = hits_str.count('*')
+    comparison_count = len(comparison_results)
 
-    # print(result_count, comparison_results[:result_count])
+    print(f"{file_name}, {hash_method}, {act}, {hits}, {similarity_points:.2f}, {done_time - start_time:.2f}, {(done_time - start_time)*100/comparison_count:.2f}, {hits_str}, {hits_str_2}")
+
     return similarity_points
 
 
@@ -227,6 +220,10 @@ def compare_files(similar_files, folder, methods, preprocesses=[]):
     for file_name in similar_files:
         file_path = os.path.join(folder, file_name)
         compare_file(file_path, similar_files, folder, methods, preprocesses)
+
+
+def print_header():
+    print("file_name, hash, preprocess, hits, similarity_points, total_duration, ms per 100, hits_string, hits_string_2")
 
 
 def main():
@@ -260,7 +257,7 @@ def main():
 
     args = parser.parse_args()
 
-    print("file_name, hash, preprocess, hits, similarity_points, total_duration, ms per 100, hits_string")
+    print_header()
 
     if args.file:
         compare_file(args.file, args.similar_files, args.folder, args.hash, args.preprocess)
