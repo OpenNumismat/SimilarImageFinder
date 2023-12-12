@@ -81,13 +81,13 @@ class FindWindow(FindDialog):
 
         self.layout().insertWidget(1, self.scanSubfolders)
 
-        show_preprocessed = settings.value('image_find/show_preprocessed', False, type=bool)
-        self.showPreprocessed = QCheckBox(self.tr("Show preprocessed images"), self)
-        self.showPreprocessed.stateChanged.connect(self.showPreprocessedChanged)
-        if show_preprocessed:
-            self.showPreprocessed.setCheckState(Qt.Checked)
+        show_filtered = settings.value('image_find/show_filtered', False, type=bool)
+        self.showFiltered = QCheckBox(self.tr("Show filtered images"), self)
+        self.showFiltered.stateChanged.connect(self.showFilterredChanged)
+        if show_filtered:
+            self.showFiltered.setCheckState(Qt.Checked)
 
-        self.layout().insertWidget(2, self.showPreprocessed)
+        self.layout().insertWidget(2, self.showFiltered)
 
         crop_square = settings.value('image_find/crop_square', False, type=bool)
         self.cropSquare = QCheckBox(self.tr("Crop to square"), self)
@@ -96,26 +96,26 @@ class FindWindow(FindDialog):
 
         self.form_layout.addRow(self.cropSquare)
 
-        self.preprocessSelector = QComboBox()
-        self.preprocessSelector.setSizePolicy(QSizePolicy.Fixed,
+        self.filterSelector = QComboBox()
+        self.filterSelector.setSizePolicy(QSizePolicy.Fixed,
                                           QSizePolicy.Fixed)
-        self.preprocessSelector.addItem("None", 'none')
-        self.preprocessSelector.addItem("Sketch", 'sketch')
-        self.preprocessSelector.addItem("PencilSketch", 'pencil_sketch')
-        self.preprocessSelector.addItem("Contours", 'contours')
-        self.preprocessSelector.addItem("Canny", 'canny')
-        self.preprocessSelector.addItem("Segments", 'segments')
-        self.preprocessSelector.addItem("FastFeature", 'fast')
-        self.preprocessSelector.addItem("GoodFeatures", 'good')
-        self.preprocessSelector.addItem("Corner Harris", 'corner')
-        self.preprocessSelector.addItem("Oriented BRIEF", 'orb')
-        self.preprocessSelector.addItem("SIFT", 'sift')
-        preprocess = settings.value('image_find/preprocess', 'none')
-        index = self.preprocessSelector.findData(preprocess)
+        self.filterSelector.addItem("None", 'none')
+        self.filterSelector.addItem("Sketch", 'sketch')
+        self.filterSelector.addItem("PencilSketch", 'pencil_sketch')
+        self.filterSelector.addItem("Contours", 'contours')
+        self.filterSelector.addItem("Canny", 'canny')
+        self.filterSelector.addItem("Segments", 'segments')
+        self.filterSelector.addItem("FastFeature", 'fast')
+        self.filterSelector.addItem("GoodFeatures", 'good')
+        self.filterSelector.addItem("Corner Harris", 'corner')
+        self.filterSelector.addItem("Oriented BRIEF", 'orb')
+        self.filterSelector.addItem("SIFT", 'sift')
+        filter_ = settings.value('image_find/filter', 'none')
+        index = self.filterSelector.findData(filter_)
         if index:
-            self.preprocessSelector.setCurrentIndex(index)
+            self.filterSelector.setCurrentIndex(index)
 
-        self.form_layout.addRow(self.tr("Preprocessing"), self.preprocessSelector)
+        self.form_layout.addRow(self.tr("Filtering"), self.filterSelector)
 
         sizes = settings.value('image_find/splitter')
         if sizes:
@@ -128,7 +128,7 @@ class FindWindow(FindDialog):
         if latest_img_folder:
             ImageEdit.latestDir = latest_img_folder
 
-    def showPreprocessedChanged(self, _):
+    def showFilterredChanged(self, _):
         if isinstance(self.table, QTableWidget):
             self.table.viewport().update()
 
@@ -156,8 +156,8 @@ class FindWindow(FindDialog):
         folder = self.folderEdit.text()
         settings.setValue('image_find/folder', folder)
 
-        show_preprocessed = (self.showPreprocessed.checkState() == Qt.Checked)
-        settings.setValue('image_find/show_preprocessed', show_preprocessed)
+        show_filtered = (self.showFiltered.checkState() == Qt.Checked)
+        settings.setValue('image_find/show_filtered', show_filtered)
 
         scan_subfolders = (self.scanSubfolders.checkState() == Qt.Checked)
         settings.setValue('image_find/scan_subfolders', scan_subfolders)
@@ -167,8 +167,8 @@ class FindWindow(FindDialog):
         crop_square = (self.cropSquare.checkState() == Qt.Checked)
         settings.setValue('image_find/crop_square', crop_square)
 
-        preprocess = self.preprocessSelector.currentData()
-        settings.setValue('image_find/preprocess', preprocess)
+        filter_ = self.filterSelector.currentData()
+        settings.setValue('image_find/filter', filter_)
 
     def done(self, r):
         super().done(r)
@@ -200,11 +200,11 @@ class FindWindow(FindDialog):
                       'mhhash', 'phash_cv', 'radialhash', 'pdqhash'):
             image = np.asarray(bytearray(target_data), dtype=np.uint8)
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-            image = self.preprocessing(image)
+            image = self.filtering(image)
             target_hash = self._imageHash(image, method)
         else:
             image = Image.open(io.BytesIO(target_data))
-            image = self.preprocessing(image)
+            image = self.filtering(image)
             target_hash = self._imageHash(image, method)
 
         fields = []
@@ -231,7 +231,7 @@ class FindWindow(FindDialog):
             if method in ('ahash_cv', 'blockhash', 'colorhash_cv',
                           'mhhash', 'phash_cv', 'radialhash', 'pdqhash'):
                 image = cv2.imdecode(np.fromfile(filePath, dtype=np.uint8), cv2.IMREAD_COLOR)
-                image = self.preprocessing(image)
+                image = self.filtering(image)
                 hash_ = self._imageHash(image, method)
                 if method == 'ahash_cv':
                     hsh = cv2.img_hash.AverageHash_create()
@@ -255,7 +255,7 @@ class FindWindow(FindDialog):
                     record_distance = 1. - record_distance
             else:
                 image = Image.open(filePath)
-                image = self.preprocessing(image)
+                image = self.filtering(image)
                 hash_ = self._imageHash(image, method)
                 record_distance = target_hash - hash_
 
@@ -320,18 +320,18 @@ class FindWindow(FindDialog):
         with open(photo_id, "rb") as file:
             data = file.read()
 
-        show_preprocessed = (self.showPreprocessed.checkState() == Qt.Checked)
-        if show_preprocessed:
+        show_filtered = (self.showFiltered.checkState() == Qt.Checked)
+        if show_filtered:
             image = np.asarray(bytearray(data), dtype=np.uint8)
             image = cv2.imdecode(image, cv2.IMREAD_COLOR)
 
-            image = self.preprocessing(image)
+            image = self.filtering(image)
 
             data = cv2.imencode('.png', image)[1].tobytes()
 
         return data
 
-    def preprocessing(self, image):
+    def filtering(self, image):
         if isinstance(image, Image.Image):  # PIL
             is_pil_image = True
         else:
@@ -356,30 +356,30 @@ class FindWindow(FindDialog):
                     offset = (h - w) // 2
                     image = image[offset:(h - offset), 0:w]
 
-        preprocess = self.preprocessSelector.currentData()
-        if preprocess != 'none':
+        filter_ = self.filterSelector.currentData()
+        if filter_ != 'none':
             if is_pil_image:
                 image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
-            if preprocess == 'sketch':
+            if filter_ == 'sketch':
                 image = img2sketch(image)
-            if preprocess == 'pencil_sketch':
+            if filter_ == 'pencil_sketch':
                 image = img2pencilSketch(image)
-            elif preprocess == 'contours':
+            elif filter_ == 'contours':
                 image = img2countours(image)
-            elif preprocess == 'canny':
+            elif filter_ == 'canny':
                 image = img2canny(image)
-            elif preprocess == 'segments':
+            elif filter_ == 'segments':
                 image = img2segments(image)
-            elif preprocess == 'fast':
+            elif filter_ == 'fast':
                 image = img2fastFeatures(image)
-            elif preprocess == 'good':
+            elif filter_ == 'good':
                 image = img2goodFeatures(image)
-            elif preprocess == 'corner':
+            elif filter_ == 'corner':
                 image = img2cornerHarris(image)
-            elif preprocess == 'orb':
+            elif filter_ == 'orb':
                 image = img2orientedBRIEF(image)
-            elif preprocess == 'sift':
+            elif filter_ == 'sift':
                 image = img2sift(image)
 
             if is_pil_image:

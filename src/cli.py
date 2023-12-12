@@ -111,15 +111,15 @@ def compare_hash(hash1, hash2, method):
     return distance
 
 
-def preprocess(image, preprocesses):
-    for act in preprocesses.split('-'):
-        if act == 'sq':
+def filtering(image, filters):
+    for filter_ in filters.split('-'):
+        if filter_ == 'sq':
             image = squaring(image)
-        if act == 'res':
+        if filter_ == 'res':
             image = resizing(image)
-        if act == 'res512':
+        if filter_ == 'res512':
             image = resizing(image, 512)
-        if act == 'res256':
+        if filter_ == 'res256':
             image = resizing(image, 256)
 
     return image
@@ -137,7 +137,7 @@ def scan(folder, except_files=[]):
             yield it.fileName(), it.filePath()
 
 
-def find_file(file_path, similar_files, folder, hash_method, act):
+def find_file(file_path, similar_files, folder, hash_method, filter_):
     start_time = time.process_time()
 
     comparison_results = []
@@ -146,13 +146,13 @@ def find_file(file_path, similar_files, folder, hash_method, act):
     file_name = os.path.basename(file_path)
 
     image = file2img(orig_file)
-    image = preprocess(image, act)
+    image = filtering(image, filter_)
     orig_hash = calc_hash(image, hash_method)
 
     target_folder = folder
     for fileName, filePath in scan(target_folder, [orig_file, ]):
         image = file2img(filePath)
-        image = preprocess(image, act)
+        image = filtering(image, filter_)
         target_hash = calc_hash(image, hash_method)
         distance = compare_hash(orig_hash, target_hash, hash_method)
 
@@ -202,24 +202,24 @@ def find_file(file_path, similar_files, folder, hash_method, act):
     hits = hits_str.count('*')
     comparison_count = len(comparison_results)
 
-    print(f"{file_name}, {hash_method}, {act}, {hits}, {similarity_points:.2f}, {done_time - start_time:.2f}, {(done_time - start_time)*100/comparison_count:.2f}, {hits_str}, {hits_str_2}")
+    print(f"{file_name}, {hash_method}, {filter_}, {hits}, {similarity_points:.2f}, {done_time - start_time:.2f}, {(done_time - start_time)*100/comparison_count:.2f}, {hits_str}, {hits_str_2}")
 
     return similarity_points
 
 
-def compare_file(file_path, similar_files, folder, methods, preprocesses=[]):
-    if not preprocesses:
-        preprocesses = ['', ]
+def compare_file(file_path, similar_files, folder, methods, filters=[]):
+    if not filters:
+        filters = ['', ]
 
-    for preprocess in preprocesses:
+    for filter_ in filters:
         for method in methods:
-            find_file(file_path, similar_files, folder, method, preprocess)
+            find_file(file_path, similar_files, folder, method, filter_)
 
 
-def compare_files(similar_files, folder, methods, preprocesses=[]):
+def compare_files(similar_files, folder, methods, filters=[]):
     for file_name in similar_files:
         file_path = os.path.join(folder, file_name)
-        compare_file(file_path, similar_files, folder, methods, preprocesses)
+        compare_file(file_path, similar_files, folder, methods, filters)
 
 
 def print_header():
@@ -250,9 +250,9 @@ def main():
         help="Hash method"
     )
     parser.add_argument(
-        "--preprocess", nargs='+',
+        "--filter", nargs='+',
         choices=('none', 'sq', 'sq-res', 'sq-res512', 'sq-res256'),
-        help="Preprocessing actions"
+        help="List of preprocessing filters"
     )
 
     args = parser.parse_args()
@@ -260,9 +260,9 @@ def main():
     print_header()
 
     if args.file:
-        compare_file(args.file, args.similar_files, args.folder, args.hash, args.preprocess)
+        compare_file(args.file, args.similar_files, args.folder, args.hash, args.filters)
     else:
-        compare_files(args.similar_files, args.folder, args.hash, args.preprocess)
+        compare_files(args.similar_files, args.folder, args.hash, args.filters)
 
 
 if __name__ == "__main__":
