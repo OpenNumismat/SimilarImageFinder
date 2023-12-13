@@ -121,6 +121,16 @@ def filtering(image, filters):
             image = resizing(image, 512)
         if filter_ == 'res256':
             image = resizing(image, 256)
+        if filter_ == 'clahe':
+            image = img2clahe(image)
+        if filter_ == 'threshold':
+            image = img2threshold(image)
+        if filter_ == 'laplacian':
+            image = img2laplacian(image)
+        if filter_ == 'sobel':
+            image = img2sobel(image)
+        if filter_ == 'sobel_x':
+            image = img2sobelX(image)
         if filter_ == 'sketch':
             image = img2sketch(image)
         if filter_ == 'pencil':

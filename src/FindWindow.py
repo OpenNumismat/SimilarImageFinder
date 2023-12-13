@@ -102,7 +102,9 @@ class FindWindow(FindDialog):
         self.filterSelector.addItem("None", 'none')
         self.filterSelector.addItem("CLAHE", 'clahe')
         self.filterSelector.addItem("Threshold", 'threshold')
-        self.filterSelector.addItem("Filter2D", 'filter2D')
+        self.filterSelector.addItem("Laplacian", 'laplacian')
+        self.filterSelector.addItem("Sobel", 'sobel')
+        self.filterSelector.addItem("SobelX", 'sobel_x')
         self.filterSelector.addItem("Sketch", 'sketch')
         self.filterSelector.addItem("PencilSketch", 'pencil_sketch')
         self.filterSelector.addItem("Contours", 'contours')
@@ -368,8 +370,12 @@ class FindWindow(FindDialog):
                 image = img2clahe(image)
             elif filter_ == 'threshold':
                 image = img2threshold(image)
-            elif filter_ == 'filter2D':
-                image = img2filter2D(image)
+            elif filter_ == 'laplacian':
+                image = img2laplacian(image)
+            elif filter_ == 'Sobel':
+                image = img2sobel(image)
+            elif filter_ == 'sobel_x':
+                image = img2sobelX(image)
             elif filter_ == 'sketch':
                 image = img2sketch(image)
             elif filter_ == 'pencil_sketch':

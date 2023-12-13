@@ -20,12 +20,36 @@ def img2threshold(image):
     return img
 
 
-def img2filter2D(image):
+def img2laplacian(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    kernel = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
-    img = cv2.filter2D(gray_image, -1, kernel)
 
-    return img
+    img = cv2.GaussianBlur(gray_image, (3, 3), 0)
+    # Filter the image using filter2D, which has inputs: (grayscale image, bit-depth, kernel)
+    filtered_image = cv2.Laplacian(img, ksize=3, ddepth=cv2.CV_16S)
+    # converting back to uint8
+    filtered_image = cv2.convertScaleAbs(filtered_image)
+
+    return filtered_image
+
+
+def img2sobel(image):
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    sobel_x_image = cv2.Sobel(gray_image, cv2.CV_16SC1, 1, 0, ksize=3)
+    sobel_y_image = cv2.Sobel(gray_image, cv2.CV_16SC1, 0, 1, ksize=3)
+    sobel_img = sobel_x_image + sobel_y_image
+    sobel_img = cv2.convertScaleAbs(sobel_img)
+
+    return sobel_img
+
+
+def img2sobelX(image):
+    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    sobel_x_image = cv2.Sobel(gray_image, cv2.CV_8U, 1, 0, ksize=3)
+    sobel_img = cv2.convertScaleAbs(sobel_x_image)
+
+    return sobel_img
 
 
 def img2sketch(image):
