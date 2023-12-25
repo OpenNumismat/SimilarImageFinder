@@ -372,7 +372,7 @@ class FindWindow(FindDialog):
                 image = img2threshold(image)
             elif filter_ == 'laplacian':
                 image = img2laplacian(image)
-            elif filter_ == 'Sobel':
+            elif filter_ == 'sobel':
                 image = img2sobel(image)
             elif filter_ == 'sobel_x':
                 image = img2sobelX(image)

@@ -285,7 +285,7 @@ def main():
     )
     parser.add_argument(
         "--filter", nargs='+',
-        help="List of preprocessing filters. Can be any combination of none,sq,res,res512,res256,clahe,threshold,filter2D,sketch,pencil,canny,segments,fast,good,corner,orb,sift joined with '-'"
+        help="List of preprocessing filters. Can be any combination of none,sq,res,res512,res256,clahe,threshold,laplacian,sobel,sobel_x,filter2D,sketch,pencil,canny,segments,fast,good,corner,orb,sift joined with '-'"
     )
 
     args = parser.parse_args()
