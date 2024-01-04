@@ -57,12 +57,12 @@ jobs:
     - name: build
       run: |
         SET PYTHONOPTIMIZE=1
-        pyinstaller image-editor.spec
+        pyinstaller similar-image-finder.spec
     - name: package
       run: |
         cd dist
-        dir ImageEditor
-        7z a -r ${{ env.PACKAGENAME }}.zip ImageEditor
+        dir ${{ needs.setup.outputs.APPNAME }}
+        7z a -r ${{ env.PACKAGENAME }}.zip ${{ needs.setup.outputs.APPNAME }}
         move ${{ env.PACKAGENAME }}.zip ..
         cd ..
     - name: upload
