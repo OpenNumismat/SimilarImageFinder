@@ -124,16 +124,16 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Show filtered images</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Cropping</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>Filtering</source>
         <translation>Filtrando</translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
