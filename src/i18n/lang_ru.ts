@@ -124,16 +124,16 @@
         <translation>Отмена</translation>
     </message>
     <message>
-        <source>Show filtered images</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Cropping</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>Filtering</source>
         <translation>Фильтрация</translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation>Показывать предобработанные изображения</translation>
     </message>
 </context>
 <context>
