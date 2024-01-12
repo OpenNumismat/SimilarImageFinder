@@ -2,6 +2,22 @@ import cv2
 import numpy as np
 
 
+def squaring(image):
+    h, w = image.shape[:2]
+    if w > h:
+        offset = (w - h) // 2
+        image = image[0:h, offset:(w - offset)]
+    else:
+        offset = (h - w) // 2
+        image = image[offset:(h - offset), 0:w]
+
+    return image
+
+
+def resizing(image, side_len=512, interpolation=cv2.INTER_AREA):
+    return cv2.resize(image, (side_len, side_len), interpolation=interpolation)
+
+
 def img2blur(image, ksize=3):
     if len(image.shape) == 3:
         image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -90,18 +106,6 @@ def img2sketch(image):
     sketch_image = cv2.divide(image, blurred_img, scale=256)
 
     return sketch_image
-
-
-def squaring(image):
-    h, w = image.shape[:2]
-    if w > h:
-        offset = (w - h) // 2
-        image = image[0:h, offset:(w - offset)]
-    else:
-        offset = (h - w) // 2
-        image = image[offset:(h - offset), 0:w]
-
-    return image
 
 
 def img2pencilSketch(image):
@@ -241,9 +245,15 @@ def img2orientedBRIEF(image, nfeatures=2000):
     img.fill(255)
 
     # Drawing the keypoints
-    kp_image = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0))
+    if width <= 512:
+        for i in kp:
+            x = int(i.pt[0])
+            y = int(i.pt[1])
+            cv2.circle(img, (x, y), 3, (0, 0, 255), -1)
+    else:
+        img = cv2.drawKeypoints(img, kp, 0, color=(0, 255, 0))
 
-    return kp_image
+    return img
 
 
 def img2sift(image, nfeatures=2000):

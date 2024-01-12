@@ -1,12 +1,8 @@
 import argparse
-import os
 import time
 from PIL import Image
 import blockhash.core
-import cv2
 import imagehash
-import numpy as np
-from PySide6.QtCore import *
 try:
     import pdqhash
     PDQHASH_AVAILABLE = True
@@ -22,22 +18,6 @@ def file2img(file_name):
 
 def img2pil(image):
     return Image.fromarray(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
-
-
-def squaring(image):
-    h, w = image.shape[:2]
-    if w > h:
-        offset = (w - h) // 2
-        image = image[0:h, offset:(w - offset)]
-    else:
-        offset = (h - w) // 2
-        image = image[offset:(h - offset), 0:w]
-
-    return image
-
-
-def resizing(image, side_len=512, interpolation=cv2.INTER_AREA):
-    return cv2.resize(image, (side_len, side_len), interpolation=interpolation)
 
 
 def calc_hash(image, method):
@@ -115,11 +95,11 @@ def filtering(image, filters):
     for filter_ in filters.split('-'):
         if filter_ == 'sq':
             image = squaring(image)
-        if filter_ == 'res':
-            image = resizing(image)
-        if filter_ == 'res512':
+        if filter_ == 'sq512':
+            image = squaring(image)
             image = resizing(image, 512)
-        if filter_ == 'res256':
+        if filter_ == 'sq256':
+            image = squaring(image)
             image = resizing(image, 256)
         if filter_ == 'clahe':
             image = img2clahe(image)
@@ -259,7 +239,7 @@ def main():
         formatter_class=argparse.RawTextHelpFormatter,
         prog='SimilarImageFinder CLI',
         epilog='Usage examples:\n'
-        ' cli.py --similar_files "01.jpg" "02.jpg" --folder C:/SimilarImageFinder/ --hash phash --preprocess corner sq-rev-sketch\n'
+        ' cli.py --similar_files "01.jpg" "02.jpg" --folder C:/SimilarImageFinder/ --hash phash --preprocess corner sq-sketch\n'
         ' cli.py --similar_files "01.jpg" "02.jpg" --file C:/similar_image.jpg --folder C:/SimilarImageFinder/ --hash phash'
     )
     parser.add_argument(
@@ -279,13 +259,13 @@ def main():
         choices=(
             'ahash', 'phash', 'dhash', 'whash', 'ahash_cv', 'blockhash',
             'mhhash', 'phash_cv', 'radialhash', 'pdqhash',
-            'crop_resistant_hash', 'bhash', 'colorhash', 'colorhash_cv'
+            'crop_resistant_hash', 'bhash', 'colorhash', 'colorhash_cv',
         ),
         help="Hash method"
     )
     parser.add_argument(
         "--filter", nargs='+',
-        help="List of preprocessing filters. Can be any combination of none,sq,res,res512,res256,clahe,threshold,laplacian,sobel,sobel_x,filter2D,sketch,pencil,canny,segments,fast,good,corner,orb,sift joined with '-'"
+        help="List of preprocessing filters. Can be any combination of none,sq,sq512,sq256,clahe,threshold,laplacian,sobel,sobel_x,filter2D,sketch,pencil,canny,segments,fast,good,corner,orb,sift joined with '-'"
     )
 
     args = parser.parse_args()

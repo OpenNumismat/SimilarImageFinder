@@ -89,12 +89,19 @@ class FindWindow(FindDialog):
 
         self.layout().insertWidget(2, self.showFiltered)
 
-        crop_square = settings.value('image_find/crop_square', False, type=bool)
-        self.cropSquare = QCheckBox(self.tr("Crop to square"), self)
-        if crop_square:
-            self.cropSquare.setCheckState(Qt.Checked)
+        self.cropType = QComboBox()
+        self.cropType.setSizePolicy(QSizePolicy.Fixed,
+                                    QSizePolicy.Fixed)
+        self.cropType.addItem("None", 'none')
+        self.cropType.addItem("Square", 'sq')
+        self.cropType.addItem("Square 512px", 'sq512')
+        self.cropType.addItem("Square 256px", 'sq256')
+        crop_type = settings.value('image_find/crop_type', 'none')
+        index = self.cropType.findData(crop_type)
+        if index:
+            self.cropType.setCurrentIndex(index)
 
-        self.form_layout.addRow(self.cropSquare)
+        self.form_layout.addRow(self.tr("Cropping"), self.cropType)
 
         self.filterSelector = QComboBox()
         self.filterSelector.setSizePolicy(QSizePolicy.Fixed,
@@ -169,8 +176,8 @@ class FindWindow(FindDialog):
 
         settings.setValue('image_find/src_folder', ImageEdit.latestDir)
 
-        crop_square = (self.cropSquare.checkState() == Qt.Checked)
-        settings.setValue('image_find/crop_square', crop_square)
+        crop_type = self.cropType.currentData()
+        settings.setValue('image_find/crop_type', crop_type)
 
         filter_ = self.filterSelector.currentData()
         settings.setValue('image_find/filter', filter_)
@@ -342,28 +349,23 @@ class FindWindow(FindDialog):
         else:
             is_pil_image = False
 
-        crop_square = (self.cropSquare.checkState() == Qt.Checked)
-        if crop_square:
-            if is_pil_image:  # PIL
-                w, h = image.size
-                if w > h:
-                    offset = (w - h) // 2
-                    image = image.crop((offset, 0, w - offset, h))
-                else:
-                    offset = (h - w) // 2
-                    image = image.crop((0, offset, w, h - offset))
-            else:  # OpenCV
-                h, w = image.shape[:2]
-                if w > h:
-                    offset = (w - h) // 2
-                    image = image[0:h, offset:(w - offset)]
-                else:
-                    offset = (h - w) // 2
-                    image = image[offset:(h - offset), 0:w]
+        crop_type = self.cropType.currentData()
+        if crop_type != 'none':
+            if isinstance(image, Image.Image):  # PIL
+                image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+
+            if crop_type == 'sq':
+                image = squaring(image)
+            elif crop_type == 'sq512':
+                image = squaring(image)
+                image = resizing(image, 512)
+            elif crop_type == 'sq256':
+                image = squaring(image)
+                image = resizing(image, 256)
 
         filter_ = self.filterSelector.currentData()
         if filter_ != 'none':
-            if is_pil_image:
+            if isinstance(image, Image.Image):  # PIL
                 image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
 
             if filter_ == 'clahe':
