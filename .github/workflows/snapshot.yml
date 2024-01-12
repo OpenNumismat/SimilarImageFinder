@@ -52,7 +52,7 @@ jobs:
     - name: build
       run: |
         SET PYTHONOPTIMIZE=1
-        pyinstaller image-editor.spec
+        pyinstaller similar-image-finder.spec
     - name: package
       run: |
         cd dist
