@@ -124,12 +124,16 @@
         <translation>Отказ</translation>
     </message>
     <message>
-        <source>Show preprocessed images</source>
-        <translation>Покажи предварително обработените изображения</translation>
+        <source>Cropping</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Crop to square</source>
-        <translation>Побиране в квадрата</translation>
+        <source>Filtering</source>
+        <translation>Филтриране</translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation>Покажи предварително обработените изображения</translation>
     </message>
 </context>
 <context>
@@ -289,16 +293,36 @@ drag-n-drop to add an image)</source>
         <translation>&amp;Изглед</translation>
     </message>
     <message>
-        <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Изображения (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
-    </message>
-    <message>
-        <source>All files (*.*)</source>
-        <translation>Всички файлове (*.*)</translation>
-    </message>
-    <message>
         <source>Image was changed. Save changes?</source>
         <translation>Изображението е променено. Да се запазят ли промените?</translation>
+    </message>
+    <message>
+        <source>Window color</source>
+        <translation>Цвят на прозореца</translation>
+    </message>
+    <message>
+        <source>Cut left half</source>
+        <translation>Отрязване на лявата половина</translation>
+    </message>
+    <message>
+        <source>Cut right half</source>
+        <translation>Отрязване на дясната половина</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <source>Image editor</source>
+        <translation>Редактор на изображения</translation>
+    </message>
+    <message>
+        <source>Save changes to current image?</source>
+        <translation>Да се запазят ли промените в текущото изображение?</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this again</source>
+        <translation>Не показвай това съобщение отново</translation>
     </message>
 </context>
 <context>
@@ -306,6 +330,22 @@ drag-n-drop to add an image)</source>
     <message>
         <source>&amp;Open...</source>
         <translation>&amp;Отваряне...</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Фонов цвят на изображението</translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation>Отваряне на файл</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Записване</translation>
+    </message>
+    <message>
+        <source>Image was changed. Save changes?</source>
+        <translation>Изображението е променено. Да се запазят ли промените?</translation>
     </message>
 </context>
 <context>
@@ -359,6 +399,24 @@ drag-n-drop to add an image)</source>
     <message>
         <source>Show grid</source>
         <translation>Показване на мрежа</translation>
+    </message>
+</context>
+<context>
+    <name>readImageFilters</name>
+    <message>
+        <source>Images (%s)</source>
+        <translation>Изображения (%s)</translation>
+    </message>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Всички файлове (*.*)</translation>
+    </message>
+</context>
+<context>
+    <name>saveImageFilters</name>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Всички файлове (*.*)</translation>
     </message>
 </context>
 </TS>
