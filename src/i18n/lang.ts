@@ -126,11 +126,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show preprocessed images</source>
+        <source>Show filtered images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Crop to square</source>
+        <source>Cropping</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filtering</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -289,15 +293,35 @@ drag-n-drop to add an image)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All files (*.*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Image was changed. Save changes?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Window color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut left half</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut right half</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save changes to current image?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this again</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -305,6 +329,22 @@ drag-n-drop to add an image)</source>
     <name>ImageEditorWindow</name>
     <message>
         <source>&amp;Open...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Image was changed. Save changes?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,6 +398,24 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Show grid</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>readImageFilters</name>
+    <message>
+        <source>Images (%s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>saveImageFilters</name>
+    <message>
+        <source>All files (*.*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
