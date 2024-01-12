@@ -124,12 +124,16 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Show preprocessed images</source>
+        <source>Show filtered images</source>
         <translation type="unfinished"/>
     </message>
     <message>
-        <source>Crop to square</source>
+        <source>Cropping</source>
         <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Filtering</source>
+        <translation>Filtrando</translation>
     </message>
 </context>
 <context>
@@ -289,16 +293,36 @@ arrastrar y soltar para añadir una imagen)</translation>
         <translation>&amp;Ver</translation>
     </message>
     <message>
-        <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Imágenes (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
-    </message>
-    <message>
-        <source>All files (*.*)</source>
-        <translation>Todos los archivos (*.*)</translation>
-    </message>
-    <message>
         <source>Image was changed. Save changes?</source>
         <translation>La imagen ha cambiado ¿Guardar cambios?</translation>
+    </message>
+    <message>
+        <source>Window color</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut left half</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut right half</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Configuración</translation>
+    </message>
+    <message>
+        <source>Image editor</source>
+        <translation>Editor de imagen</translation>
+    </message>
+    <message>
+        <source>Save changes to current image?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Don&apos;t show this again</source>
+        <translation>No mostrar de nuevo esto</translation>
     </message>
 </context>
 <context>
@@ -306,6 +330,22 @@ arrastrar y soltar para añadir una imagen)</translation>
     <message>
         <source>&amp;Open...</source>
         <translation>&amp;Abrir...</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation>Abrir archivo</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Guardar</translation>
+    </message>
+    <message>
+        <source>Image was changed. Save changes?</source>
+        <translation>La imagen ha cambiado ¿Guardar cambios?</translation>
     </message>
 </context>
 <context>
@@ -359,6 +399,24 @@ arrastrar y soltar para añadir una imagen)</translation>
     <message>
         <source>Show grid</source>
         <translation>Ver parrilla</translation>
+    </message>
+</context>
+<context>
+    <name>readImageFilters</name>
+    <message>
+        <source>Images (%s)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Todos los archivos (*.*)</translation>
+    </message>
+</context>
+<context>
+    <name>saveImageFilters</name>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Todos los archivos (*.*)</translation>
     </message>
 </context>
 </TS>
