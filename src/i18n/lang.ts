@@ -126,15 +126,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show filtered images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Cropping</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Filtering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
