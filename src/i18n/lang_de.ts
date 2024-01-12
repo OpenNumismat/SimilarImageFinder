@@ -124,12 +124,16 @@
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <source>Show preprocessed images</source>
-        <translation>Zeige vorverarbeitete Bilder</translation>
+        <source>Show filtered images</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Crop to square</source>
-        <translation>Beschneiden auf Quadrat</translation>
+        <source>Cropping</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Filtering</source>
+        <translation>Filtern</translation>
     </message>
 </context>
 <context>
@@ -289,16 +293,36 @@ drag-n-drop to add an image)</source>
         <translation>&amp;Ansehen</translation>
     </message>
     <message>
-        <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Bilder (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
-    </message>
-    <message>
-        <source>All files (*.*)</source>
-        <translation>Alle Dateien (*.*)</translation>
-    </message>
-    <message>
         <source>Image was changed. Save changes?</source>
         <translation>Das Bild wurde geändert. Änderungen speichern?</translation>
+    </message>
+    <message>
+        <source>Window color</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut left half</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Cut right half</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <source>Image editor</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>Save changes to current image?</source>
+        <translation>Änderungen im aktuellen Bild speichern?</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this again</source>
+        <translation>Nicht mehr anzeigen</translation>
     </message>
 </context>
 <context>
@@ -306,6 +330,22 @@ drag-n-drop to add an image)</source>
     <message>
         <source>&amp;Open...</source>
         <translation>Ö&amp;ffnen...</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Hintergrundfarbe</translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation>Datei öffnen</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Speichern</translation>
+    </message>
+    <message>
+        <source>Image was changed. Save changes?</source>
+        <translation>Das Bild wurde geändert. Änderungen speichern?</translation>
     </message>
 </context>
 <context>
@@ -359,6 +399,24 @@ drag-n-drop to add an image)</source>
     <message>
         <source>Show grid</source>
         <translation>Raster anzeigen</translation>
+    </message>
+</context>
+<context>
+    <name>readImageFilters</name>
+    <message>
+        <source>Images (%s)</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Alle Dateien (*.*)</translation>
+    </message>
+</context>
+<context>
+    <name>saveImageFilters</name>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Alle Dateien (*.*)</translation>
     </message>
 </context>
 </TS>
