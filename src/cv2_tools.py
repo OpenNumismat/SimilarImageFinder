@@ -249,7 +249,7 @@ def img2orientedBRIEF(image, nfeatures=2000):
         for i in kp:
             x = int(i.pt[0])
             y = int(i.pt[1])
-            cv2.circle(img, (x, y), 3, (0, 0, 255), -1)
+            cv2.circle(img, (x, y), 2, (0, 0, 255), -1)
     else:
         img = cv2.drawKeypoints(img, kp, 0, color=(0, 255, 0))
 
