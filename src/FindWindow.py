@@ -82,7 +82,7 @@ class FindWindow(FindDialog):
         self.layout().insertWidget(1, self.scanSubfolders)
 
         show_filtered = settings.value('image_find/show_filtered', False, type=bool)
-        self.showFiltered = QCheckBox(self.tr("Show filtered images"), self)
+        self.showFiltered = QCheckBox(self.tr("Show preprocessed images"), self)
         self.showFiltered.stateChanged.connect(self.showFilterredChanged)
         if show_filtered:
             self.showFiltered.setCheckState(Qt.Checked)
