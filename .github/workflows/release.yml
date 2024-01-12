@@ -1,17 +1,9 @@
-name: "Snapshot"
+name: "Release"
 
 on:
   push:
-    branches: [ "main" ]
-    paths-ignore:
-      - 'src/i18n/*'
-      - 'src/icons/*'
-      - 'src/resources.qrc'
-#  pull_request:
-#    branches: [ "main" ]
-
-#permissions:
-#  contents: read
+    tags:
+      - '*'
 
 jobs:
   version:
@@ -23,7 +15,7 @@ jobs:
     name: Title
     runs-on: ubuntu-latest
     outputs:
-      PACKAGENAME: ${{ needs.version.outputs.APPNAME }}-${{ needs.version.outputs.VERSION }}.${{ needs.version.outputs.REVISION }}
+      PACKAGENAME: ${{ needs.version.outputs.APPNAME }}-${{ needs.version.outputs.VERSION }}
       APPNAME: ${{ needs.version.outputs.APPNAME }}
     steps:
       - run: "true"
@@ -48,7 +40,7 @@ jobs:
         touch metadata.yml
         echo "FileDescription: ${{ needs.title.outputs.APPNAME }}" >> metadata.yml
         echo "InternalName: ${{ needs.title.outputs.APPNAME }}" >> metadata.yml
-        create-version-file metadata.yml --outfile versionfile.txt --version ${{ needs.version.outputs.VERSION }}.0.${{ needs.version.outputs.REVISION }}
+        create-version-file metadata.yml --outfile versionfile.txt --version ${{ needs.version.outputs.VERSION }}
     - name: build
       run: |
         SET PYTHONOPTIMIZE=1
@@ -67,8 +59,8 @@ jobs:
         path: ${{ needs.title.outputs.PACKAGENAME }}.zip
         #if-no-files-found: error
 
-  prerelease:
-    name: Create pre-release
+  release:
+    name: Create release
     needs: [title, windows]
     runs-on: ubuntu-latest
     env:
@@ -80,12 +72,10 @@ jobs:
         path: artifacts
     - name: release
       id: release
-      uses: marvinpinto/action-automatic-releases@latest
+      uses: actions/create-release@v1
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
+        tag_name: ${{ github.ref }}
+        release_name: Version ${{ github.ref }}
     - name: upload
       uses: actions/upload-release-asset@v1
       with:
