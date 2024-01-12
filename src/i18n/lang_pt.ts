@@ -124,12 +124,16 @@
         <translation>Cancelar</translation>
     </message>
     <message>
-        <source>Show preprocessed images</source>
-        <translation>Mostrar imagens pré-processadas</translation>
+        <source>Cropping</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <source>Crop to square</source>
-        <translation>Recortar quadrado</translation>
+        <source>Filtering</source>
+        <translation>A filtrar</translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation>Mostrar imagens pré-processadas</translation>
     </message>
 </context>
 <context>
@@ -289,16 +293,36 @@ arraste e largue para adicionar)</translation>
         <translation>&amp;Ver</translation>
     </message>
     <message>
-        <source>Images (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</source>
-        <translation>Imagens (*.jpg *.jpeg *.bmp *.png *.tiff *.gif)</translation>
-    </message>
-    <message>
-        <source>All files (*.*)</source>
-        <translation>Todos os ficheiros (*.*)</translation>
-    </message>
-    <message>
         <source>Image was changed. Save changes?</source>
         <translation>A imagem foi alterada. Gravar alterações?</translation>
+    </message>
+    <message>
+        <source>Window color</source>
+        <translation>Cor da janela</translation>
+    </message>
+    <message>
+        <source>Cut left half</source>
+        <translation>Cortar a metade esquerda</translation>
+    </message>
+    <message>
+        <source>Cut right half</source>
+        <translation>Cortar a metade direita</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation>Definições</translation>
+    </message>
+    <message>
+        <source>Image editor</source>
+        <translation>Editor de imagem</translation>
+    </message>
+    <message>
+        <source>Save changes to current image?</source>
+        <translation>Gravar alterações à imagem?</translation>
+    </message>
+    <message>
+        <source>Don&apos;t show this again</source>
+        <translation>Não mostrar novamente</translation>
     </message>
 </context>
 <context>
@@ -306,6 +330,22 @@ arraste e largue para adicionar)</translation>
     <message>
         <source>&amp;Open...</source>
         <translation>&amp;Abrir...</translation>
+    </message>
+    <message>
+        <source>Background color</source>
+        <translation>Cor do fundo</translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation>Abrir ficheiro</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation>Gravar</translation>
+    </message>
+    <message>
+        <source>Image was changed. Save changes?</source>
+        <translation>A imagem foi alterada. Gravar alterações?</translation>
     </message>
 </context>
 <context>
@@ -359,6 +399,24 @@ arraste e largue para adicionar)</translation>
     <message>
         <source>Show grid</source>
         <translation>Mostrar grelha</translation>
+    </message>
+</context>
+<context>
+    <name>readImageFilters</name>
+    <message>
+        <source>Images (%s)</source>
+        <translation>Imagens (%s)</translation>
+    </message>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Todos os ficheiros (*.*)</translation>
+    </message>
+</context>
+<context>
+    <name>saveImageFilters</name>
+    <message>
+        <source>All files (*.*)</source>
+        <translation>Todos os ficheiros (*.*)</translation>
     </message>
 </context>
 </TS>
