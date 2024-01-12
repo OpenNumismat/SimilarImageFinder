@@ -124,16 +124,16 @@
         <translation>Отказ</translation>
     </message>
     <message>
-        <source>Show filtered images</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
         <source>Cropping</source>
         <translation type="unfinished"/>
     </message>
     <message>
         <source>Filtering</source>
         <translation>Филтриране</translation>
+    </message>
+    <message>
+        <source>Show preprocessed images</source>
+        <translation>Покажи предварително обработените изображения</translation>
     </message>
 </context>
 <context>
