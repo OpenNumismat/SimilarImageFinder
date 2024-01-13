@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Filtering</source>
-        <translation>A filtrar</translation>
+        <translation>Filtrar</translation>
     </message>
     <message>
         <source>Show preprocessed images</source>
