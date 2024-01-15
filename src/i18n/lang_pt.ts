@@ -125,11 +125,11 @@
     </message>
     <message>
         <source>Cropping</source>
-        <translation type="unfinished"/>
+        <translation>Cortar</translation>
     </message>
     <message>
         <source>Filtering</source>
-        <translation>A filtrar</translation>
+        <translation>Filtrar</translation>
     </message>
     <message>
         <source>Show preprocessed images</source>
