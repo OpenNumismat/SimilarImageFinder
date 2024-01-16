@@ -44,8 +44,9 @@ jobs:
         python -m pip install -r requirements.txt
         pip install wheel
         git clone https://github.com/pyinstaller/pyinstaller
+        cd pyinstaller
         git checkout 6.2.0
-        cd pyinstaller/bootloader
+        cd bootloader
         python ./waf all
         cd .. && pip install .
         pip install pyinstaller-versionfile
