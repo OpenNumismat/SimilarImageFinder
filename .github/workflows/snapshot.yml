@@ -45,7 +45,7 @@ jobs:
         pip install wheel
         git clone https://github.com/pyinstaller/pyinstaller
         cd pyinstaller
-        git checkout 6.2.0
+        git checkout v6.2.0
         cd bootloader
         python ./waf all
         cd .. && pip install .
