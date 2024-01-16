@@ -6,7 +6,7 @@
 
 # SimilarImageFinder
 
-This application is designed to test algorithms for finding similar images using perceptual hashes.
+This application is designed to explore algorithms for finding similar images using perceptual hashes.
 The following hash types are currently supported:
 * Average hashing
 * Perceptual hashing
@@ -20,7 +20,11 @@ The following hash types are currently supported:
 * Color moment hashing
 * PDQ hashing
 
+Perceptual hashing works well for paper (stamps, bills, postcards), but does not work well with 3D objects (coins) due to glare. To avoid this filters and preprocessing are used.
+For coins photos best results are obtained by cropping the image to a 256px square, highlighting the points with orientedBRIEF and calculating the perceptual hash.
+
 For hash calcualtion uses labraries [ImageHash](https://github.com/JohannesBuchner/imagehash), [OpenCV](https://github.com/opencv/opencv-python), [pdqhash](https://github.com/faustomorales/pdqhash-python) and [blockhash](https://github.com/commonsmachinery/blockhash-python).
+For filtering images uses [OpenCV](https://opencv.org/) labrary.
 
 SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) project, so it aims to finding coins images.
 
@@ -29,7 +33,14 @@ SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) p
 #### Download
 [Latest version for Windows 10 and later](https://github.com/OpenNumismat/SimilarImageFinder/releases/latest)
 
-#### Usage
+#### For run from source code
+Run GUI:
+
+    pip3 install -r requirements.txt
+    python3 src/run.py
+
+Run CLI:
+
     python3 src/cli.py [-h] [--file FILE] --similar_files SIMILAR_FILES [SIMILAR_FILES ...] --folder FOLDER
                        --hash
                        {ahash,phash,dhash,whash,ahash_cv,blockhash,mhhash,phash_cv,radialhash,pdqhash,crop_resistant_hash,bhash,colorhash,colorhash_cv}
@@ -50,7 +61,3 @@ SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) p
     Usage examples:
       cli.py --similar_files "01.jpg" "02.jpg" --folder C:/SimilarImageFinder/ --hash phash --preprocess corner sq-sketch
       cli.py --similar_files "01.jpg" "02.jpg" --file C:/similar_image.jpg --folder C:/SimilarImageFinder/ --hash phash pdqhash
-
-#### For run from source code
-    pip3 install -r requirements.txt
-    python3 src/run.py
