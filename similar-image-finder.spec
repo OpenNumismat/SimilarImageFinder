@@ -15,19 +15,8 @@ a = Analysis(
 pyz = PYZ(a.pure)
 
 
-import pyinstaller_versionfile
-import src
-
 VERSION = src.__version__
 APP_NAME = "SimilarImageFinder"
-
-pyinstaller_versionfile.create_versionfile(
-    output_file="versionfile.txt",
-    version=VERSION,
-    file_description=APP_NAME,
-    internal_name=APP_NAME,
-)
-
 
 exe = EXE(
     pyz,
@@ -57,8 +46,3 @@ coll = COLLECT(
     upx_exclude=[],
     name=APP_NAME,
 )
-
-
-import shutil
-
-shutil.make_archive(f'{APP_NAME}-{VERSION}', 'zip', 'dist')
