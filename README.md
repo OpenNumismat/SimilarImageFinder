@@ -6,6 +6,8 @@
 
 # SimilarImageFinder
 
+SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) project, so it aims to finding coins images.
+
 This application is designed to explore algorithms for finding similar images using perceptual hashes.
 The following hash types are currently supported:
 * Average hashing
@@ -20,13 +22,11 @@ The following hash types are currently supported:
 * Color moment hashing
 * PDQ hashing
 
-Perceptual hashing works well for paper (stamps, bills, postcards), but does not work well with 3D objects (coins) due to glare. To avoid this filters and preprocessing are used.
-For coins photos best results are obtained by cropping the image to a 256px square, highlighting the points with orientedBRIEF and calculating the perceptual hash.
+Perceptual hashing works well for paper (stamps, banknotes, postcards), but does not work with 3D objects (coins) due to glare. To avoid this filters and preprocessing are used.
+For coins photos best results are obtained by cropping the image to a 256px square, highlighting the feature points with [orientedBRIEF](https://docs.opencv.org/4.x/d1/d89/tutorial_py_orb.html) and calculating the perceptual hash.
 
 For hash calcualtion uses labraries [ImageHash](https://github.com/JohannesBuchner/imagehash), [OpenCV](https://github.com/opencv/opencv-python), [pdqhash](https://github.com/faustomorales/pdqhash-python) and [blockhash](https://github.com/commonsmachinery/blockhash-python).
 For filtering images uses [OpenCV](https://opencv.org/) labrary.
-
-SimilarImageFinder is a part of [OpenNumismat](http://opennumismat.github.io/) project, so it aims to finding coins images.
 
 ![Screenshot](https://opennumismat.github.io/images/imageFinder.png)
 
