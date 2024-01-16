@@ -15,7 +15,6 @@ a = Analysis(
 pyz = PYZ(a.pure)
 
 
-VERSION = src.__version__
 APP_NAME = "SimilarImageFinder"
 
 exe = EXE(
