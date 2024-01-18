@@ -1,6 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file alias="binoculars.png">icons/binoculars.png</file>
+    <file alias="SimilarImageFinder.png">icons/SimilarImageFinder.png</file>
 </qresource>
 <qresource prefix="i18n">
     <file alias="lang_bg.qm">i18n/lang_bg.qm</file>
