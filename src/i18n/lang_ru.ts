@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Cropping</source>
-        <translation type="unfinished"/>
+        <translation>Обрезка</translation>
     </message>
     <message>
         <source>Filtering</source>
