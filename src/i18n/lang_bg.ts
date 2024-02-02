@@ -74,7 +74,7 @@
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation>Намиране</translation>
+        <translation>Търсене</translation>
     </message>
     <message>
         <source>Field</source>
@@ -109,7 +109,7 @@
     <name>FindWindow</name>
     <message>
         <source>Find in folder</source>
-        <translation>Намиране в папка</translation>
+        <translation>Търсене в папка</translation>
     </message>
     <message>
         <source>Scan subfolders</source>
