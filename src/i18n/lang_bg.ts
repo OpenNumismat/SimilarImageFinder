@@ -147,7 +147,7 @@
     <name>ImageEdit</name>
     <message>
         <source>Exchange with</source>
-        <translation>Размяна с</translation>
+        <translation>Размени с</translation>
     </message>
     <message>
         <source>Load...</source>
