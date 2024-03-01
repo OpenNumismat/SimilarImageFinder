@@ -333,7 +333,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="unfinished"/>
+        <translation>Color de fondo</translation>
     </message>
     <message>
         <source>Open File</source>
