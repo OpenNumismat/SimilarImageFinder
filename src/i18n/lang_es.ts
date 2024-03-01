@@ -298,7 +298,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Window color</source>
-        <translation type="unfinished"/>
+        <translation>Color de ventana</translation>
     </message>
     <message>
         <source>Cut left half</source>
@@ -318,7 +318,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Save changes to current image?</source>
-        <translation type="unfinished"/>
+        <translation>¿Grabar cambios a imagen actual?</translation>
     </message>
     <message>
         <source>Don&apos;t show this again</source>
