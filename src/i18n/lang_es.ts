@@ -302,11 +302,11 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Cut left half</source>
-        <translation type="unfinished"/>
+        <translation>Cortar mitad izquierda</translation>
     </message>
     <message>
         <source>Cut right half</source>
-        <translation type="unfinished"/>
+        <translation>Cortar mitad derecha</translation>
     </message>
     <message>
         <source>Settings</source>
