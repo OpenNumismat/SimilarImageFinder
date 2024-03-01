@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Cropping</source>
-        <translation type="unfinished"/>
+        <translation>Recortando</translation>
     </message>
     <message>
         <source>Filtering</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Show preprocessed images</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar imágenes preprocesadas</translation>
     </message>
 </context>
 <context>
@@ -298,15 +298,15 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Window color</source>
-        <translation type="unfinished"/>
+        <translation>Color de ventana</translation>
     </message>
     <message>
         <source>Cut left half</source>
-        <translation type="unfinished"/>
+        <translation>Cortar mitad izquierda</translation>
     </message>
     <message>
         <source>Cut right half</source>
-        <translation type="unfinished"/>
+        <translation>Cortar mitad derecha</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -318,7 +318,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Save changes to current image?</source>
-        <translation type="unfinished"/>
+        <translation>¿Grabar cambios a imagen actual?</translation>
     </message>
     <message>
         <source>Don&apos;t show this again</source>
@@ -333,7 +333,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     </message>
     <message>
         <source>Background color</source>
-        <translation type="unfinished"/>
+        <translation>Color de fondo</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -405,7 +405,7 @@ arrastrar y soltar para añadir una imagen)</translation>
     <name>readImageFilters</name>
     <message>
         <source>Images (%s)</source>
-        <translation type="unfinished"/>
+        <translation>Imágenes (%s)</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
