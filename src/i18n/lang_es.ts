@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>Show preprocessed images</source>
-        <translation type="unfinished"/>
+        <translation>Mostrar imágenes preprocesadas</translation>
     </message>
 </context>
 <context>
