@@ -405,7 +405,7 @@ drag-n-drop to add an image)</source>
     <name>readImageFilters</name>
     <message>
         <source>Images (%s)</source>
-        <translation type="unfinished"/>
+        <translation>Bilder (%s)</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
