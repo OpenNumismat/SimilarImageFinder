@@ -306,7 +306,7 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Cut right half</source>
-        <translation type="unfinished"/>
+        <translation>Rechte Hälfte abschneiden</translation>
     </message>
     <message>
         <source>Settings</source>
