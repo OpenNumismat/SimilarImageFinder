@@ -298,15 +298,15 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Window color</source>
-        <translation type="unfinished"/>
+        <translation>Fensterfarbe</translation>
     </message>
     <message>
         <source>Cut left half</source>
-        <translation type="unfinished"/>
+        <translation>Linke Hälfte abschneiden</translation>
     </message>
     <message>
         <source>Cut right half</source>
-        <translation type="unfinished"/>
+        <translation>Rechte Hälfte abschneiden</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -314,7 +314,7 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Image editor</source>
-        <translation type="unfinished"/>
+        <translation>Bildbearbeiter</translation>
     </message>
     <message>
         <source>Save changes to current image?</source>
@@ -405,7 +405,7 @@ drag-n-drop to add an image)</source>
     <name>readImageFilters</name>
     <message>
         <source>Images (%s)</source>
-        <translation type="unfinished"/>
+        <translation>Bilder (%s)</translation>
     </message>
     <message>
         <source>All files (*.*)</source>
