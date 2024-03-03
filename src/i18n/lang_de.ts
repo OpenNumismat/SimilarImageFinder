@@ -314,7 +314,7 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Image editor</source>
-        <translation type="unfinished"/>
+        <translation>Bildbearbeiter</translation>
     </message>
     <message>
         <source>Save changes to current image?</source>
