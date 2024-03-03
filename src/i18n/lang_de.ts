@@ -298,7 +298,7 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Window color</source>
-        <translation type="unfinished"/>
+        <translation>Fensterfarbe</translation>
     </message>
     <message>
         <source>Cut left half</source>
