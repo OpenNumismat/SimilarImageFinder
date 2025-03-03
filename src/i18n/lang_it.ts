@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Hashing method</source>
-        <translation type="unfinished"/>
+        <translation>Metodo di hashing</translation>
     </message>
     <message>
         <source>Start</source>
