@@ -86,15 +86,15 @@
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"/>
+        <translation>Inizia</translation>
     </message>
     <message>
         <source>Similarity</source>
-        <translation type="unfinished"/>
+        <translation>Somiglianza</translation>
     </message>
     <message>
         <source>No image fields selected</source>
-        <translation type="unfinished"/>
+        <translation>Nessun campo immagine selezionato</translation>
     </message>
     <message>
         <source>Processing...</source>
