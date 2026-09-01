@@ -147,7 +147,7 @@
     <name>ImageEdit</name>
     <message>
         <source>Exchange with</source>
-        <translation>Размяна с</translation>
+        <translation>Размени с</translation>
     </message>
     <message>
         <source>Load...</source>
@@ -159,11 +159,11 @@
     </message>
     <message>
         <source>Paste</source>
-        <translation>Постави</translation>
+        <translation>Поставяне</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Копиране</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -202,7 +202,7 @@ drag-n-drop to add an image)</source>
     <name>ImageEditorDialog</name>
     <message>
         <source>Browse in viewer</source>
-        <translation>Преглед с външна програма</translation>
+        <translation>Преглед с външно приложение</translation>
     </message>
     <message>
         <source>&amp;Save As...</source>
@@ -226,11 +226,11 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>&amp;Normal Size</source>
-        <translation>&amp;Нормален размер</translation>
+        <translation>&amp;Действителен размер</translation>
     </message>
     <message>
         <source>&amp;Fit to Window</source>
-        <translation>&amp;Побери в прозореца</translation>
+        <translation>&amp;Побиране в прозореца</translation>
     </message>
     <message>
         <source>Show Tool Bar</source>
@@ -266,19 +266,19 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Копиране</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation>Постави</translation>
+        <translation>Поставяне</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation>Отмени</translation>
+        <translation>Отмяна</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation>Върни</translation>
+        <translation>Възстановяване</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -360,7 +360,7 @@ drag-n-drop to add an image)</source>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копирай</translation>
+        <translation>Копиране</translation>
     </message>
     <message>
         <source>Save as...</source>
